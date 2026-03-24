@@ -2,64 +2,70 @@
   <defs>
     <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#0f172a"/>
-      <stop offset="100%" style="stop-color:#1e1b4b"/>
+      <stop offset="50%" style="stop-color:#1e1b4b"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
     </linearGradient>
   </defs>
 
   <rect width="700" height="180" fill="url(#bg5)" rx="12"/>
 
-  <text x="350" y="28" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#94a3b8">Knowledge Compounding Loop</text>
+  <!-- Decorative grid dots -->
+  <g opacity="0.08" fill="#8b5cf6">
+    <circle cx="20" cy="20" r="1.5"/><circle cx="40" cy="20" r="1.5"/><circle cx="60" cy="20" r="1.5"/><circle cx="80" cy="20" r="1.5"/>
+    <circle cx="620" cy="160" r="1.5"/><circle cx="640" cy="160" r="1.5"/><circle cx="660" cy="160" r="1.5"/><circle cx="680" cy="160" r="1.5"/>
+  </g>
 
-  <!-- Boxes in a cycle -->
+  <text x="350" y="28" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="600" fill="#94a3b8">Knowledge Compounding Loop</text>
+
   <!-- Solve -->
-  <g transform="translate(50, 60)">
-    <rect width="110" height="55" rx="8" fill="#6366f1" opacity="0.2" stroke="#6366f1" stroke-width="1.5"/>
-    <text x="55" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#c7d2fe">Solve</text>
-    <text x="55" y="43" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">fix the problem</text>
+  <g transform="translate(50, 55)">
+    <rect width="115" height="58" rx="8" fill="none" stroke="#6366f1" stroke-width="1.5" opacity="0.6"/>
+    <text x="57" y="25" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#a5b4fc">Solve</text>
+    <text x="57" y="43" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">fix the problem</text>
   </g>
 
   <!-- Arrow -->
-  <g transform="translate(168, 83)">
-    <line x1="0" y1="0" x2="25" y2="0" stroke="#475569" stroke-width="1.5"/>
-    <polygon points="25,-4 33,0 25,4" fill="#475569"/>
+  <g transform="translate(173, 80)">
+    <line x1="0" y1="0" x2="25" y2="0" stroke="#6B7280" stroke-width="1.5"/>
+    <polygon points="25,-4 33,0 25,4" fill="#6B7280"/>
   </g>
 
   <!-- Compound -->
-  <g transform="translate(205, 60)">
-    <rect width="110" height="55" rx="8" fill="#10b981" opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
-    <text x="55" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#a7f3d0">Compound</text>
-    <text x="55" y="43" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">ops/solutions/</text>
+  <g transform="translate(210, 55)">
+    <rect width="115" height="58" rx="8" fill="none" stroke="#10b981" stroke-width="1.5" opacity="0.6"/>
+    <text x="57" y="25" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#6ee7b7">Compound</text>
+    <text x="57" y="43" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">ops/solutions/</text>
   </g>
 
   <!-- Arrow -->
-  <g transform="translate(323, 83)">
-    <line x1="0" y1="0" x2="25" y2="0" stroke="#475569" stroke-width="1.5"/>
-    <polygon points="25,-4 33,0 25,4" fill="#475569"/>
+  <g transform="translate(333, 80)">
+    <line x1="0" y1="0" x2="25" y2="0" stroke="#6B7280" stroke-width="1.5"/>
+    <polygon points="25,-4 33,0 25,4" fill="#6B7280"/>
   </g>
 
   <!-- Search -->
-  <g transform="translate(360, 60)">
-    <rect width="110" height="55" rx="8" fill="#8b5cf6" opacity="0.2" stroke="#8b5cf6" stroke-width="1.5"/>
-    <text x="55" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#ddd6fe">Search</text>
-    <text x="55" y="43" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">learnings agent</text>
+  <g transform="translate(365, 55)">
+    <rect width="115" height="58" rx="8" fill="none" stroke="#8b5cf6" stroke-width="1.5" opacity="0.6"/>
+    <text x="57" y="25" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#c4b5fd">Search</text>
+    <text x="57" y="43" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">learnings agent</text>
   </g>
 
   <!-- Arrow -->
-  <g transform="translate(478, 83)">
-    <line x1="0" y1="0" x2="25" y2="0" stroke="#475569" stroke-width="1.5"/>
-    <polygon points="25,-4 33,0 25,4" fill="#475569"/>
+  <g transform="translate(488, 80)">
+    <line x1="0" y1="0" x2="25" y2="0" stroke="#6B7280" stroke-width="1.5"/>
+    <polygon points="25,-4 33,0 25,4" fill="#6B7280"/>
   </g>
 
   <!-- Plan -->
-  <g transform="translate(510, 60)">
-    <rect width="110" height="55" rx="8" fill="#f59e0b" opacity="0.2" stroke="#f59e0b" stroke-width="1.5"/>
-    <text x="55" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fde68a">Plan</text>
-    <text x="55" y="43" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#94a3b8">informed by past</text>
+  <g transform="translate(520, 55)">
+    <rect width="115" height="58" rx="8" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity="0.6"/>
+    <text x="57" y="25" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#fcd34d">Plan</text>
+    <text x="57" y="43" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">informed by past</text>
   </g>
 
   <!-- Loop arrow back -->
-  <path d="M 620,87 Q 660,87 660,130 Q 660,155 350,155 Q 40,155 40,130 Q 40,87 50,87" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
-  <polygon points="50,83 42,87 50,91" fill="#6366f1" opacity="0.4"/>
+  <path d="M 635,84 Q 665,84 665,125 Q 665,150 350,150 Q 35,150 35,125 Q 35,84 50,84" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+  <polygon points="50,80 42,84 50,88" fill="#6366f1" opacity="0.4"/>
 
-  <text x="350" y="168" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#6366f1" opacity="0.6">each sprint makes the next sprint easier</text>
+  <text x="350" y="170" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#6366f1" opacity="0.5" font-style="italic">each sprint makes the next sprint easier</text>
 </svg>
