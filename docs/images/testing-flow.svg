@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400">
+  <!-- Outer container -->
+  <rect width="720" height="400" rx="16" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+
+  <!-- Test Pipeline badge -->
+  <rect x="244" y="28" width="232" height="44" rx="22" fill="#2D2B55"/>
+  <circle cx="274" cy="50" r="12" fill="#7C3AED"/>
+  <text x="276" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="white">&#x2713;</text>
+  <text x="376" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="white">Test Pipeline</text>
+
+  <!-- Command pill -->
+  <rect x="320" y="82" width="80" height="28" rx="14" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="360" y="101" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#6B7280">/test</text>
+
+  <!-- Label -->
+  <text x="360" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" letter-spacing="2">GAP ANALYSIS &#x2192; TDD &#x2192; FIX CYCLE</text>
+
+  <!-- Dashed separator -->
+  <line x1="40" y1="152" x2="680" y2="152" stroke="#DDD6FE" stroke-width="1" stroke-dasharray="6,4"/>
+
+  <!-- Step 1: Gap Analysis -->
+  <text x="52" y="180" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#991B1B" letter-spacing="1">IDENTIFY GAPS</text>
+
+  <rect x="40" y="190" width="640" height="44" rx="10" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="6,4"/>
+  <rect x="56" y="198" width="165" height="28" rx="14" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="138" y="217" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">test-gap-analyzer</text>
+  <rect x="235" y="198" width="180" height="28" rx="14" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="325" y="217" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">Untested code paths</text>
+  <rect x="429" y="198" width="150" height="28" rx="14" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="504" y="217" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">Missing edge cases</text>
+
+  <!-- Arrow -->
+  <text x="360" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#9CA3AF">&#x2193;</text>
+
+  <!-- Step 2: Codex TDD -->
+  <text x="52" y="282" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#92400E" letter-spacing="1">WRITE + RUN TESTS</text>
+
+  <rect x="40" y="292" width="640" height="44" rx="10" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="6,4"/>
+  <rect x="56" y="300" width="200" height="28" rx="14" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="156" y="319" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">Codex CLI &#x2014; sandboxed</text>
+  <rect x="270" y="300" width="200" height="28" rx="14" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="370" y="319" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">RED &#x2192; GREEN &#x2192; REFACTOR</text>
+  <rect x="484" y="300" width="170" height="28" rx="14" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
+  <text x="569" y="319" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#92400E">fix cycle until green</text>
+
+  <!-- Arrow -->
+  <text x="360" y="360" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#9CA3AF">&#x2193;</text>
+
+  <!-- Output badge -->
+  <g transform="translate(230, 372)">
+    <rect width="260" height="36" rx="18" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1.5"/>
+    <circle cx="24" cy="18" r="10" fill="#059669"/>
+    <text x="26" y="23" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="white">&#x2713;</text>
+    <text x="148" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#065F46">All Tests Passing</text>
+  </g>
+
+  <!-- Loop-back hint -->
+  <path d="M 480,330 Q 620,330 620,290 Q 620,262 480,262" fill="none" stroke="#FCA5A5" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <polygon points="482,258 480,266 477,258" fill="#FCA5A5"/>
+</svg>

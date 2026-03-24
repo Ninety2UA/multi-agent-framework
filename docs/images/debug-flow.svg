@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400">
+  <!-- Outer container -->
+  <rect width="720" height="400" rx="16" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+
+  <!-- Debugging badge -->
+  <rect x="244" y="28" width="232" height="44" rx="22" fill="#2D2B55"/>
+  <circle cx="274" cy="50" r="12" fill="#7C3AED"/>
+  <text x="276" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="white">&#x1F41B;</text>
+  <text x="376" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="white">Debugging</text>
+
+  <!-- Command pill -->
+  <rect x="316" y="82" width="88" height="28" rx="14" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="360" y="101" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#6B7280">/debug</text>
+
+  <!-- Label -->
+  <text x="360" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" letter-spacing="2">REPRODUCE &#x2192; DIAGNOSE &#x2192; FIX</text>
+
+  <!-- Dashed separator -->
+  <line x1="40" y1="152" x2="680" y2="152" stroke="#DDD6FE" stroke-width="1" stroke-dasharray="6,4"/>
+
+  <!-- Step 1: Reproduce -->
+  <text x="52" y="180" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#991B1B" letter-spacing="1">REPRODUCE</text>
+  <text x="136" y="180" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">confirm the bug exists</text>
+
+  <rect x="40" y="190" width="640" height="44" rx="10" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="6,4"/>
+  <rect x="56" y="198" width="210" height="28" rx="14" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="161" y="217" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">bug-reproduction-validator</text>
+  <rect x="280" y="198" width="180" height="28" rx="14" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="370" y="217" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">Create minimal repro case</text>
+  <rect x="474" y="198" width="180" height="28" rx="14" fill="#FEE2E2" stroke="#FCA5A5" stroke-width="1"/>
+  <text x="564" y="217" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#991B1B">Confirm test fails</text>
+
+  <!-- Arrow -->
+  <text x="360" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#9CA3AF">&#x2193;</text>
+
+  <!-- Step 2: Diagnose -->
+  <text x="52" y="282" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#92400E" letter-spacing="1">DIAGNOSE</text>
+  <text x="122" y="282" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">root cause analysis</text>
+
+  <rect x="40" y="292" width="640" height="44" rx="10" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="6,4"/>
+  <rect x="56" y="300" width="195" height="28" rx="14" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="153" y="319" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">systematic-debugging skill</text>
+  <rect x="265" y="300" width="170" height="28" rx="14" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="350" y="319" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">Error taxonomy</text>
+  <rect x="449" y="300" width="200" height="28" rx="14" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="549" y="319" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">Assumption tracking</text>
+
+  <!-- Arrow -->
+  <text x="360" y="360" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#9CA3AF">&#x2193;</text>
+
+  <!-- Output badge -->
+  <g transform="translate(210, 372)">
+    <rect width="300" height="36" rx="18" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1.5"/>
+    <circle cx="24" cy="18" r="10" fill="#059669"/>
+    <text x="26" y="23" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="white">&#x2713;</text>
+    <text x="168" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#065F46">Fix + Verify with evidence</text>
+  </g>
+</svg>

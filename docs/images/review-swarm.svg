@@ -1,144 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520">
-  <defs>
-    <marker id="rs-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9CA3AF"/>
-    </marker>
-  </defs>
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 560">
   <!-- Outer container -->
-  <rect width="1100" height="520" rx="16" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <rect width="720" height="560" rx="16" fill="white" stroke="#E5E7EB" stroke-width="1"/>
 
-  <!-- Code Under Review badge -->
-  <rect x="410" y="20" width="280" height="44" rx="22" fill="#2D2B55"/>
-  <circle cx="440" cy="42" r="10" fill="#7C3AED"/>
-  <text x="442" y="46" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">&#x2B;</text>
-  <text x="560" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="white">Code Under Review</text>
+  <!-- Review Swarm badge -->
+  <rect x="244" y="28" width="232" height="44" rx="22" fill="#2D2B55"/>
+  <circle cx="274" cy="50" r="12" fill="#7C3AED"/>
+  <text x="276" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="white">&#x26A1;</text>
+  <text x="376" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="white">Review Swarm</text>
+
+  <!-- Command pill -->
+  <rect x="310" y="82" width="100" height="28" rx="14" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="360" y="101" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#6B7280">/review</text>
 
   <!-- Section label -->
-  <text x="550" y="90" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" letter-spacing="2">DISPATCHES 7 REVIEWERS IN PARALLEL</text>
+  <text x="360" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" letter-spacing="2">DISPATCHES 7 REVIEWERS IN PARALLEL</text>
 
   <!-- Dashed separator -->
-  <line x1="60" y1="100" x2="1040" y2="100" stroke="#DDD6FE" stroke-width="1" stroke-dasharray="6,4"/>
+  <line x1="40" y1="152" x2="680" y2="152" stroke="#DDD6FE" stroke-width="1" stroke-dasharray="6,4"/>
 
-  <!-- Reviewer cards row -->
-  <!-- Gemini CLI -->
-  <g transform="translate(20, 120)">
-    <rect width="145" height="120" rx="10" fill="white" stroke="#E5E7EB" stroke-width="1"/>
-    <rect width="145" height="36" rx="10" fill="#ECFDF5"/>
-    <rect y="26" width="145" height="10" fill="#ECFDF5"/>
-    <text x="72" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#065F46">Gemini CLI</text>
-    <text x="72" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Architecture</text>
-    <text x="72" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Design</text>
-    <text x="72" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Readability</text>
-    <text x="72" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Documentation</text>
-  </g>
+  <!-- Agent container -->
+  <rect x="40" y="168" width="640" height="108" rx="12" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="6,4"/>
 
-  <!-- Codex CLI -->
-  <g transform="translate(175, 120)">
-    <rect width="145" height="120" rx="10" fill="white" stroke="#E5E7EB" stroke-width="1"/>
-    <rect width="145" height="36" rx="10" fill="#FEF3C7"/>
-    <rect y="26" width="145" height="10" fill="#FEF3C7"/>
-    <text x="72" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#92400E">Codex CLI</text>
-    <text x="72" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Logic</text>
-    <text x="72" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Edge cases</text>
-    <text x="72" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Type safety</text>
-    <text x="72" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Test coverage</text>
-  </g>
+  <!-- Row 1: 4 agents -->
+  <rect x="58" y="182" width="120" height="36" rx="18" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="118" y="205" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">Gemini CLI</text>
 
-  <!-- security-sentinel -->
-  <g transform="translate(330, 120)">
-    <rect width="145" height="120" rx="10" fill="white" stroke="#E5E7EB" stroke-width="1"/>
-    <rect width="145" height="36" rx="10" fill="#FEE2E2"/>
-    <rect y="26" width="145" height="10" fill="#FEE2E2"/>
-    <text x="72" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#991B1B">security-sentinel</text>
-    <text x="72" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">OWASP Top 10</text>
-    <text x="72" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Injection</text>
-    <text x="72" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Auth/authz</text>
-    <text x="72" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Data exposure</text>
-  </g>
+  <rect x="192" y="182" width="110" height="36" rx="18" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="247" y="205" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">Codex CLI</text>
 
-  <!-- perf-oracle -->
-  <g transform="translate(485, 120)">
-    <rect width="145" height="120" rx="10" fill="white" stroke="#E5E7EB" stroke-width="1"/>
-    <rect width="145" height="36" rx="10" fill="#EDE9FE"/>
-    <rect y="26" width="145" height="10" fill="#EDE9FE"/>
-    <text x="72" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#5B21B6">perf-oracle</text>
-    <text x="72" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">O(n&#xB2;) detection</text>
-    <text x="72" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">N+1 queries</text>
-    <text x="72" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Memory leaks</text>
-    <text x="72" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Scale 10x/100x</text>
-  </g>
+  <rect x="316" y="182" width="150" height="36" rx="18" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="391" y="205" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">security-sentinel</text>
 
-  <!-- simplicity -->
-  <g transform="translate(640, 120)">
-    <rect width="145" height="120" rx="10" fill="white" stroke="#E5E7EB" stroke-width="1"/>
-    <rect width="145" height="36" rx="10" fill="#DBEAFE"/>
-    <rect y="26" width="145" height="10" fill="#DBEAFE"/>
-    <text x="72" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#1E40AF">simplicity</text>
-    <text x="72" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Over-engineering</text>
-    <text x="72" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">YAGNI</text>
-    <text x="72" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Dead patterns</text>
-    <text x="72" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Abstraction debt</text>
-  </g>
+  <rect x="480" y="182" width="125" height="36" rx="18" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="542" y="205" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">perf-oracle</text>
 
-  <!-- conventions -->
-  <g transform="translate(795, 120)">
-    <rect width="145" height="120" rx="10" fill="white" stroke="#E5E7EB" stroke-width="1"/>
-    <rect width="145" height="36" rx="10" fill="#FEF3C7"/>
-    <rect y="26" width="145" height="10" fill="#FEF3C7"/>
-    <text x="72" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#92400E">conventions</text>
-    <text x="72" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Naming</text>
-    <text x="72" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">File structure</text>
-    <text x="72" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Code style</text>
-    <text x="72" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Patterns</text>
-  </g>
+  <!-- Row 2: 3 agents -->
+  <rect x="140" y="228" width="110" height="36" rx="18" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="195" y="251" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">simplicity</text>
 
-  <!-- architecture -->
-  <g transform="translate(950, 120)">
-    <rect width="130" height="120" rx="10" fill="white" stroke="#E5E7EB" stroke-width="1"/>
-    <rect width="130" height="36" rx="10" fill="#ECFDF5"/>
-    <rect y="26" width="130" height="10" fill="#ECFDF5"/>
-    <text x="65" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#065F46">architecture</text>
-    <text x="65" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">SOLID</text>
-    <text x="65" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Coupling</text>
-    <text x="65" y="88" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Cohesion</text>
-    <text x="65" y="104" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Boundaries</text>
-  </g>
+  <rect x="264" y="228" width="120" height="36" rx="18" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="324" y="251" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">conventions</text>
 
-  <!-- Down arrow label -->
-  <text x="550" y="272" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#9CA3AF">&#x2193;</text>
+  <rect x="398" y="228" width="120" height="36" rx="18" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="458" y="251" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#374151">architecture</text>
+
+  <!-- Down arrow -->
+  <text x="360" y="310" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" fill="#9CA3AF">&#x2193;</text>
 
   <!-- MERGES ALL OUTPUTS label -->
-  <text x="550" y="296" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" letter-spacing="2">MERGES ALL OUTPUTS</text>
+  <text x="360" y="340" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" letter-spacing="2">MERGES ALL OUTPUTS</text>
 
   <!-- Dashed separator -->
-  <line x1="60" y1="306" x2="1040" y2="306" stroke="#DDD6FE" stroke-width="1" stroke-dasharray="6,4"/>
+  <line x1="40" y1="354" x2="680" y2="354" stroke="#DDD6FE" stroke-width="1" stroke-dasharray="6,4"/>
 
-  <!-- findings-synthesizer badge -->
-  <g transform="translate(335, 320)">
-    <rect width="430" height="60" rx="12" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1.5"/>
-    <circle cx="32" cy="30" r="14" fill="#7C3AED"/>
-    <text x="34" y="35" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="white">&#x2727;</text>
-    <text x="240" y="26" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#5B21B6">findings-synthesizer</text>
-    <text x="240" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#6B7280">Deduplicate &#xB7; Confidence tier (HIGH/MED/LOW) &#xB7; Priority rank</text>
+  <!-- Findings Synthesizer badge -->
+  <g transform="translate(210, 370)">
+    <rect width="300" height="48" rx="12" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1.5"/>
+    <circle cx="30" cy="24" r="14" fill="#7C3AED"/>
+    <text x="32" y="29" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="white">&#x2727;</text>
+    <text x="170" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#5B21B6">Findings Synthesizer</text>
   </g>
 
-  <!-- Arrow to report -->
-  <line x1="550" y1="385" x2="550" y2="410" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#rs-arr)"/>
+  <!-- Down arrow -->
+  <text x="360" y="446" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" fill="#9CA3AF">&#x2193;</text>
 
-  <!-- Synthesized Report -->
-  <g transform="translate(310, 416)">
-    <rect width="480" height="80" rx="12" fill="white" stroke="#E5E7EB" stroke-width="1.5"/>
-    <text x="240" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#1F2937">Synthesized Report</text>
-    <line x1="20" y1="42" x2="460" y2="42" stroke="#E5E7EB" stroke-width="1"/>
-    <!-- Priority badges -->
-    <rect x="30" y="52" width="90" height="22" rx="11" fill="#FEE2E2"/>
-    <text x="75" y="67" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#991B1B">P1 Critical</text>
-    <rect x="135" y="52" width="110" height="22" rx="11" fill="#FEF3C7"/>
-    <text x="190" y="67" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#92400E">P2 Important</text>
-    <rect x="260" y="52" width="85" height="22" rx="11" fill="#F3F4F6"/>
-    <text x="302" y="67" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#6B7280">P3 Minor</text>
-    <rect x="360" y="52" width="100" height="22" rx="11" fill="white" stroke="#E5E7EB" stroke-width="1"/>
-    <text x="410" y="67" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#9CA3AF">Suppressed</text>
-  </g>
+  <!-- PRIORITIZED REPORT label -->
+  <text x="360" y="474" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" letter-spacing="2">PRIORITIZED REPORT</text>
+
+  <!-- Dashed separator -->
+  <line x1="40" y1="488" x2="680" y2="488" stroke="#DDD6FE" stroke-width="1" stroke-dasharray="6,4"/>
+
+  <!-- Priority pills -->
+  <rect x="82" y="504" width="110" height="32" rx="16" fill="#FEE2E2"/>
+  <text x="137" y="525" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#991B1B">P1 Critical</text>
+
+  <rect x="206" y="504" width="120" height="32" rx="16" fill="#FEF3C7"/>
+  <text x="266" y="525" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#92400E">P2 Important</text>
+
+  <rect x="340" y="504" width="100" height="32" rx="16" fill="#F3F4F6"/>
+  <text x="390" y="525" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#6B7280">P3 Minor</text>
+
+  <rect x="454" y="504" width="110" height="32" rx="16" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="509" y="525" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#9CA3AF">Suppressed</text>
 </svg>

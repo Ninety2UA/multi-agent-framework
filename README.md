@@ -9,15 +9,17 @@
 <p align="center">
   <a href="#what-is-this">Overview</a> ·
   <a href="#project-structure">Structure</a> ·
-  <a href="#sprint-lifecycle">Lifecycle</a> ·
-  <a href="#parallel-review-architecture">Review Swarm</a> ·
-  <a href="#quality-gates">Quality Gates</a> ·
+  <a href="#sprint-pipeline-ship">Pipeline</a> ·
+  <a href="#planning-pipeline-plan">Plan</a> ·
+  <a href="#deep-research-deep-research">Research</a> ·
+  <a href="#wave-orchestration-build">Build</a> ·
+  <a href="#review-swarm-review">Review</a> ·
+  <a href="#test-pipeline-test">Test</a> ·
+  <a href="#debugging-debug">Debug</a> ·
+  <a href="#quality-gates">Gates</a> ·
+  <a href="#context-recovery">Context</a> ·
   <a href="#getting-started">Quick Start</a> ·
   <a href="#commands-reference">Commands</a> ·
-  <a href="#skills-reference">Skills</a> ·
-  <a href="#agents-reference">Agents</a> ·
-  <a href="#context-management">Context</a> ·
-  <a href="#how-it-compares">Compare</a> ·
   <a href="#faq">FAQ</a>
 </p>
 
@@ -107,12 +109,12 @@ All agents coordinate through markdown files in [`ops/`](ops/). This is the sour
 
 ---
 
-## Sprint lifecycle
+## Sprint Pipeline (`/ship`)
 
-Every goal flows through a structured lifecycle. Each phase has dedicated [commands](#commands-reference), [skills](#skills-reference), and [agents](#agents-reference).
+Every goal flows through a structured pipeline. Run [`/ship`](.claude/commands/ship.md) for fully autonomous execution, or invoke each phase individually.
 
 <p align="center">
-  <img src="docs/images/sprint-lifecycle.svg" alt="Sprint lifecycle — Phase 0 Analyze through Phase 6 Ship with review loop" width="95%">
+  <img src="docs/images/sprint-lifecycle.svg" alt="Sprint pipeline — Plan, Build, Review, Test, Ship stages with agents" width="80%">
 </p>
 
 | Phase | What happens | Agent(s) | Command |
@@ -128,6 +130,16 @@ Every goal flows through a structured lifecycle. Each phase has dedicated [comma
 
 ---
 
+## Planning Pipeline (`/plan`)
+
+Analyzes the full codebase with Gemini's 1M context, searches institutional knowledge, decomposes the goal with shadow paths and error maps, then validates via [`plan-checker`](.claude/agents/plan-checker.md).
+
+<p align="center">
+  <img src="docs/images/planning-flow.svg" alt="Planning pipeline — Gemini scan, learnings research, shadow path planning, plan validation" width="80%">
+</p>
+
+---
+
 ## Deep Research (`/deep-research`)
 
 Spawns 5 research agents in parallel before planning, then synthesizes findings into a unified research brief.
@@ -138,7 +150,7 @@ Spawns 5 research agents in parallel before planning, then synthesizes findings 
 
 ---
 
-## Wave Orchestration (`/orchestrate`)
+## Wave Orchestration (`/build`)
 
 Groups plan tasks by dependency into waves. Independent tasks within each wave run in parallel; an [`integration-verifier`](.claude/agents/integration-verifier.md) validates between waves.
 
@@ -184,12 +196,12 @@ codex exec "$(cat .claude/skills/test-driven-development/SKILL.md) Write tests f
 
 ---
 
-## Parallel review architecture
+## Review Swarm (`/review`)
 
-The framework's most sophisticated mechanism. Up to 8 reviewers analyze the same code simultaneously through different lenses, then a [`findings-synthesizer`](.claude/agents/findings-synthesizer.md) merges, deduplicates, and priority-ranks all findings.
+Up to 7 reviewers analyze the same code simultaneously through different lenses, then a [`findings-synthesizer`](.claude/agents/findings-synthesizer.md) merges, deduplicates, and priority-ranks all findings.
 
 <p align="center">
-  <img src="docs/images/review-swarm.svg" alt="Review swarm — 7 parallel reviewers feeding into findings-synthesizer" width="95%">
+  <img src="docs/images/review-swarm.svg" alt="Review swarm — 7 parallel reviewers feeding into findings-synthesizer" width="80%">
 </p>
 
 ### Confidence tiering
@@ -208,12 +220,32 @@ Each reviewer has a "Do Not Flag" list to reduce noise — readability-aiding re
 
 ---
 
-## Quality gates
+## Test Pipeline (`/test`)
+
+Identifies untested code paths with [`test-gap-analyzer`](.claude/agents/test-gap-analyzer.md), then writes and runs tests via [Codex CLI](https://github.com/openai/codex) using the TDD skill in a sandboxed environment.
+
+<p align="center">
+  <img src="docs/images/testing-flow.svg" alt="Test pipeline — gap analysis, Codex TDD, fix cycle" width="80%">
+</p>
+
+---
+
+## Debugging (`/debug`)
+
+Structured debugging with [`systematic-debugging`](.claude/skills/systematic-debugging/SKILL.md): reproduce the bug first, perform root cause analysis, then fix with evidence.
+
+<p align="center">
+  <img src="docs/images/debug-flow.svg" alt="Debugging — reproduce, diagnose, fix" width="80%">
+</p>
+
+---
+
+## Quality Gates
 
 Five non-negotiable checkpoints enforced at every stage:
 
 <p align="center">
-  <img src="docs/images/quality-gates.svg" alt="Five quality gates — plan validated, failing test first, root cause first, evidence first, review first" width="95%">
+  <img src="docs/images/quality-gates.svg" alt="Five quality gates — plan validated, failing test first, root cause first, evidence first, review first" width="80%">
 </p>
 
 | Gate | Enforced by | Rule |
@@ -431,11 +463,13 @@ claude
 
 ---
 
-## Context management
+## Context Recovery
 
-### Dual-loop context exhaustion recovery
+Three defense mechanisms prevent long sprints from dying to context limits:
 
-Two defense mechanisms prevent long sprints from dying to context limits:
+<p align="center">
+  <img src="docs/images/context-recovery.svg" alt="Context recovery — inner loop, outer loop, analysis paralysis detection" width="80%">
+</p>
 
 | Layer | Mechanism | Guards against |
 |---|---|---|

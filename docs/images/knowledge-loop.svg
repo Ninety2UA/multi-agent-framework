@@ -1,65 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 200">
-  <defs>
-    <marker id="kl-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9CA3AF"/>
-    </marker>
-  </defs>
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380">
   <!-- Outer container -->
-  <rect width="780" height="200" rx="16" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <rect width="720" height="380" rx="16" fill="white" stroke="#E5E7EB" stroke-width="1"/>
 
-  <!-- Title -->
-  <text x="390" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" letter-spacing="2">KNOWLEDGE COMPOUNDING LOOP</text>
+  <!-- Knowledge Compounding badge -->
+  <rect x="204" y="28" width="312" height="44" rx="22" fill="#2D2B55"/>
+  <circle cx="234" cy="50" r="12" fill="#7C3AED"/>
+  <text x="236" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="white">&#x2728;</text>
+  <text x="376" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="white">Knowledge Compounding</text>
 
-  <!-- Card 1: Solve -->
-  <g transform="translate(40, 60)">
-    <rect width="140" height="80" rx="10" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1"/>
-    <circle cx="70" cy="28" r="14" fill="#059669"/>
-    <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="white">1</text>
-    <text x="70" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#065F46">Solve</text>
-    <text x="70" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">fix the problem</text>
+  <!-- Command pill -->
+  <rect x="300" y="82" width="120" height="28" rx="14" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="360" y="101" text-anchor="middle" font-family="'SF Mono', monospace" font-size="12" fill="#6B7280">/compound</text>
+
+  <!-- Label -->
+  <text x="360" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" letter-spacing="2">EVERY SOLUTION FEEDS FUTURE SPRINTS</text>
+
+  <!-- Dashed separator -->
+  <line x1="40" y1="152" x2="680" y2="152" stroke="#DDD6FE" stroke-width="1" stroke-dasharray="6,4"/>
+
+  <!-- Flow container -->
+  <rect x="40" y="168" width="640" height="100" rx="12" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="6,4"/>
+
+  <!-- Step 1: Solve -->
+  <rect x="60" y="188" width="120" height="56" rx="10" fill="white" stroke="#A7F3D0" stroke-width="1.5"/>
+  <text x="120" y="213" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#065F46">Solve</text>
+  <text x="120" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">fix the problem</text>
+
+  <!-- Arrow -->
+  <text x="198" y="220" font-family="system-ui, sans-serif" font-size="18" fill="#9CA3AF">&#x2192;</text>
+
+  <!-- Step 2: Compound -->
+  <rect x="218" y="188" width="120" height="56" rx="10" fill="white" stroke="#FCD34D" stroke-width="1.5"/>
+  <text x="278" y="213" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#92400E">Compound</text>
+  <text x="278" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">ops/solutions/</text>
+
+  <!-- Arrow -->
+  <text x="356" y="220" font-family="system-ui, sans-serif" font-size="18" fill="#9CA3AF">&#x2192;</text>
+
+  <!-- Step 3: Search -->
+  <rect x="376" y="188" width="120" height="56" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+  <text x="436" y="213" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#5B21B6">Search</text>
+  <text x="436" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">learnings agent</text>
+
+  <!-- Arrow -->
+  <text x="514" y="220" font-family="system-ui, sans-serif" font-size="18" fill="#9CA3AF">&#x2192;</text>
+
+  <!-- Step 4: Plan -->
+  <rect x="534" y="188" width="120" height="56" rx="10" fill="white" stroke="#93C5FD" stroke-width="1.5"/>
+  <text x="594" y="213" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#1E40AF">Plan</text>
+  <text x="594" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">informed by past</text>
+
+  <!-- Loop back arrow -->
+  <path d="M 654,268 Q 670,268 670,290 Q 670,314 360,314 Q 50,314 50,290 Q 50,268 60,268" fill="none" stroke="#C4B5FD" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <polygon points="58,264 60,272 63,264" fill="#C4B5FD"/>
+
+  <!-- Loop label -->
+  <rect x="318" y="305" width="85" height="22" rx="11" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="360" y="320" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF" font-style="italic">next sprint</text>
+
+  <!-- Bottom badge -->
+  <g transform="translate(230, 340)">
+    <rect width="260" height="28" rx="14" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1"/>
+    <text x="130" y="19" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#5B21B6">Each sprint gets smarter</text>
   </g>
-
-  <!-- Arrow 1 -->
-  <line x1="190" y1="100" x2="220" y2="100" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#kl-arr)"/>
-
-  <!-- Card 2: Compound -->
-  <g transform="translate(230, 60)">
-    <rect width="140" height="80" rx="10" fill="#FEF3C7" stroke="#FCD34D" stroke-width="1"/>
-    <circle cx="70" cy="28" r="14" fill="#D97706"/>
-    <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="white">2</text>
-    <text x="70" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#92400E">Compound</text>
-    <text x="70" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">ops/solutions/</text>
-  </g>
-
-  <!-- Arrow 2 -->
-  <line x1="380" y1="100" x2="410" y2="100" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#kl-arr)"/>
-
-  <!-- Card 3: Search -->
-  <g transform="translate(420, 60)">
-    <rect width="140" height="80" rx="10" fill="#EDE9FE" stroke="#C4B5FD" stroke-width="1"/>
-    <circle cx="70" cy="28" r="14" fill="#7C3AED"/>
-    <text x="70" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="white">3</text>
-    <text x="70" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#5B21B6">Search</text>
-    <text x="70" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">learnings agent</text>
-  </g>
-
-  <!-- Arrow 3 -->
-  <line x1="570" y1="100" x2="600" y2="100" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#kl-arr)"/>
-
-  <!-- Card 4: Plan -->
-  <g transform="translate(610, 60)">
-    <rect width="130" height="80" rx="10" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1"/>
-    <circle cx="65" cy="28" r="14" fill="#2563EB"/>
-    <text x="65" y="33" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="white">4</text>
-    <text x="65" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#1E40AF">Plan</text>
-    <text x="65" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">informed by past</text>
-  </g>
-
-  <!-- Dashed loop back -->
-  <path d="M 740,140 Q 756,140 756,162 Q 756,180 390,180 Q 24,180 24,162 Q 24,140 40,140" fill="none" stroke="#C4B5FD" stroke-width="1.5" stroke-dasharray="6,4"/>
-  <polygon points="38,136 40,144 43,136" fill="#C4B5FD"/>
-
-  <rect x="350" y="170" width="85" height="22" rx="11" fill="white" stroke="#E5E7EB" stroke-width="1"/>
-  <text x="392" y="185" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF" font-style="italic">next sprint</text>
 </svg>

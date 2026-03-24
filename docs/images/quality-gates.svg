@@ -1,88 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 170">
-  <defs>
-    <marker id="qg-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9CA3AF"/>
-    </marker>
-  </defs>
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380">
   <!-- Outer container -->
-  <rect width="960" height="170" rx="16" fill="white" stroke="#E5E7EB" stroke-width="1"/>
+  <rect width="720" height="380" rx="16" fill="white" stroke="#E5E7EB" stroke-width="1"/>
 
+  <!-- Quality Gates badge -->
+  <rect x="244" y="28" width="232" height="44" rx="22" fill="#2D2B55"/>
+  <circle cx="274" cy="50" r="12" fill="#7C3AED"/>
+  <text x="276" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="white">&#x2694;</text>
+  <text x="376" y="56" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="white">Quality Gates</text>
+
+  <!-- Label -->
+  <text x="360" y="102" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#9CA3AF" letter-spacing="2">5 NON-NEGOTIABLE CHECKPOINTS</text>
+
+  <!-- Dashed separator -->
+  <line x1="40" y1="116" x2="680" y2="116" stroke="#DDD6FE" stroke-width="1" stroke-dasharray="6,4"/>
+
+  <!-- Gates container -->
+  <rect x="40" y="132" width="640" height="160" rx="12" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="6,4"/>
+
+  <!-- Row 1: gates 1-3 -->
   <!-- Gate 1 -->
-  <g transform="translate(16, 14)">
-    <rect width="168" height="140" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
-    <rect width="168" height="38" rx="10" fill="#EDE9FE"/>
-    <rect y="28" width="168" height="10" fill="#EDE9FE"/>
-    <circle cx="22" cy="20" r="12" fill="#7C3AED"/>
-    <text x="22" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">1</text>
-    <text x="100" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#5B21B6">Plan validated</text>
-    <text x="84" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">plan-checker agent</text>
-    <text x="84" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">reviews before build</text>
-    <rect x="34" y="96" width="100" height="22" rx="11" fill="#F3F4F6"/>
-    <text x="84" y="111" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">max 3 iterations</text>
-  </g>
-
-  <line x1="189" y1="84" x2="205" y2="84" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#qg-arr)"/>
+  <rect x="60" y="148" width="192" height="56" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+  <circle cx="82" cy="176" r="12" fill="#7C3AED"/>
+  <text x="82" y="181" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">1</text>
+  <text x="160" y="170" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#374151">Plan validated</text>
+  <text x="160" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">plan-checker agent</text>
 
   <!-- Gate 2 -->
-  <g transform="translate(210, 14)">
-    <rect width="168" height="140" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
-    <rect width="168" height="38" rx="10" fill="#EDE9FE"/>
-    <rect y="28" width="168" height="10" fill="#EDE9FE"/>
-    <circle cx="22" cy="20" r="12" fill="#7C3AED"/>
-    <text x="22" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">2</text>
-    <text x="103" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#5B21B6">Failing test first</text>
-    <text x="84" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">TDD skill enforces</text>
-    <text x="84" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">RED-GREEN-REFACTOR</text>
-    <rect x="24" y="96" width="120" height="22" rx="11" fill="#F3F4F6"/>
-    <text x="84" y="111" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">no code without demand</text>
-  </g>
-
-  <line x1="383" y1="84" x2="399" y2="84" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#qg-arr)"/>
+  <rect x="264" y="148" width="192" height="56" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+  <circle cx="286" cy="176" r="12" fill="#7C3AED"/>
+  <text x="286" y="181" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">2</text>
+  <text x="368" y="170" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#374151">Failing test first</text>
+  <text x="368" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">TDD skill</text>
 
   <!-- Gate 3 -->
-  <g transform="translate(404, 14)">
-    <rect width="168" height="140" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
-    <rect width="168" height="38" rx="10" fill="#EDE9FE"/>
-    <rect y="28" width="168" height="10" fill="#EDE9FE"/>
-    <circle cx="22" cy="20" r="12" fill="#7C3AED"/>
-    <text x="22" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">3</text>
-    <text x="103" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#5B21B6">Root cause first</text>
-    <text x="84" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">systematic-debugging</text>
-    <text x="84" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">requires diagnosis</text>
-    <rect x="24" y="96" width="120" height="22" rx="11" fill="#F3F4F6"/>
-    <text x="84" y="111" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">no symptom patches</text>
-  </g>
+  <rect x="468" y="148" width="192" height="56" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+  <circle cx="490" cy="176" r="12" fill="#7C3AED"/>
+  <text x="490" y="181" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">3</text>
+  <text x="572" y="170" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#374151">Root cause first</text>
+  <text x="572" y="188" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">systematic-debugging</text>
 
-  <line x1="577" y1="84" x2="593" y2="84" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#qg-arr)"/>
-
+  <!-- Row 2: gates 4-5 -->
   <!-- Gate 4 -->
-  <g transform="translate(598, 14)">
-    <rect width="168" height="140" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
-    <rect width="168" height="38" rx="10" fill="#EDE9FE"/>
-    <rect y="28" width="168" height="10" fill="#EDE9FE"/>
-    <circle cx="22" cy="20" r="12" fill="#7C3AED"/>
-    <text x="22" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">4</text>
-    <text x="103" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#5B21B6">Evidence first</text>
-    <text x="84" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">verification checklist</text>
-    <text x="84" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">all checks must pass</text>
-    <rect x="14" y="96" width="140" height="22" rx="11" fill="#F3F4F6"/>
-    <text x="84" y="111" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">no "done" without proof</text>
-  </g>
-
-  <line x1="771" y1="84" x2="787" y2="84" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#qg-arr)"/>
+  <rect x="130" y="218" width="192" height="56" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+  <circle cx="152" cy="246" r="12" fill="#7C3AED"/>
+  <text x="152" y="251" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">4</text>
+  <text x="232" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#374151">Evidence first</text>
+  <text x="232" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">verification checklist</text>
 
   <!-- Gate 5 -->
-  <g transform="translate(792, 14)">
-    <rect width="150" height="140" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
-    <rect width="150" height="38" rx="10" fill="#EDE9FE"/>
-    <rect y="28" width="150" height="10" fill="#EDE9FE"/>
-    <circle cx="22" cy="20" r="12" fill="#7C3AED"/>
-    <text x="22" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">5</text>
-    <text x="90" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#5B21B6">Review first</text>
-    <text x="75" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">parallel swarm</text>
-    <text x="75" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">up to 8 reviewers</text>
-    <rect x="20" y="96" width="110" height="22" rx="11" fill="#F3F4F6"/>
-    <text x="75" y="111" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">max 3 cycles</text>
+  <rect x="396" y="218" width="192" height="56" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+  <circle cx="418" cy="246" r="12" fill="#7C3AED"/>
+  <text x="418" y="251" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">5</text>
+  <text x="500" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#374151">Review first</text>
+  <text x="500" y="258" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">parallel swarm, max 3 cycles</text>
+
+  <!-- Dashed separator -->
+  <line x1="40" y1="308" x2="680" y2="308" stroke="#DDD6FE" stroke-width="1" stroke-dasharray="6,4"/>
+
+  <!-- Bottom badge -->
+  <g transform="translate(210, 324)">
+    <rect width="300" height="36" rx="18" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1.5"/>
+    <circle cx="24" cy="18" r="10" fill="#059669"/>
+    <text x="26" y="23" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="white">&#x2713;</text>
+    <text x="168" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#065F46">All gates must pass to ship</text>
   </g>
 </svg>
