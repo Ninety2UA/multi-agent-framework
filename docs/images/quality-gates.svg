@@ -1,72 +1,88 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 150">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 170">
   <defs>
-    <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af"/>
+    <marker id="qg-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9CA3AF"/>
     </marker>
   </defs>
 
-  <rect width="920" height="150" rx="12" fill="white"/>
+  <!-- Outer container -->
+  <rect width="960" height="170" rx="16" fill="white" stroke="#E5E7EB" stroke-width="1"/>
 
   <!-- Gate 1 -->
-  <g transform="translate(15, 10)">
-    <rect width="160" height="128" rx="8" fill="#FFB3B3" stroke="#e6a0a0" stroke-width="1"/>
-    <circle cx="80" cy="26" r="14" fill="#CC6666"/>
-    <text x="80" y="31" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" font-weight="700" fill="white">1</text>
-    <text x="80" y="56" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="700" fill="#8b2525">Plan validated</text>
-    <text x="80" y="76" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#4a5568">plan-checker agent</text>
-    <text x="80" y="92" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#4a5568">reviews before build</text>
-    <text x="80" y="112" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#9ca3af" font-style="italic">max 3 iterations</text>
+  <g transform="translate(16, 14)">
+    <rect width="168" height="140" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+    <rect width="168" height="38" rx="10" fill="#EDE9FE"/>
+    <rect y="28" width="168" height="10" fill="#EDE9FE"/>
+    <circle cx="22" cy="20" r="12" fill="#7C3AED"/>
+    <text x="22" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">1</text>
+    <text x="100" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#5B21B6">Plan validated</text>
+    <text x="84" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">plan-checker agent</text>
+    <text x="84" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">reviews before build</text>
+    <rect x="34" y="96" width="100" height="22" rx="11" fill="#F3F4F6"/>
+    <text x="84" y="111" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">max 3 iterations</text>
   </g>
 
-  <line x1="180" y1="74" x2="198" y2="74" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="189" y1="84" x2="205" y2="84" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#qg-arr)"/>
 
   <!-- Gate 2 -->
-  <g transform="translate(203, 10)">
-    <rect width="160" height="128" rx="8" fill="#FFB3B3" stroke="#e6a0a0" stroke-width="1"/>
-    <circle cx="80" cy="26" r="14" fill="#CC6666"/>
-    <text x="80" y="31" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" font-weight="700" fill="white">2</text>
-    <text x="80" y="56" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="700" fill="#8b2525">Failing test first</text>
-    <text x="80" y="76" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#4a5568">TDD skill enforces</text>
-    <text x="80" y="92" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#4a5568">RED-GREEN-REFACTOR</text>
-    <text x="80" y="112" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#9ca3af" font-style="italic">no code without demand</text>
+  <g transform="translate(210, 14)">
+    <rect width="168" height="140" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+    <rect width="168" height="38" rx="10" fill="#EDE9FE"/>
+    <rect y="28" width="168" height="10" fill="#EDE9FE"/>
+    <circle cx="22" cy="20" r="12" fill="#7C3AED"/>
+    <text x="22" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">2</text>
+    <text x="103" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#5B21B6">Failing test first</text>
+    <text x="84" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">TDD skill enforces</text>
+    <text x="84" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">RED-GREEN-REFACTOR</text>
+    <rect x="24" y="96" width="120" height="22" rx="11" fill="#F3F4F6"/>
+    <text x="84" y="111" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">no code without demand</text>
   </g>
 
-  <line x1="368" y1="74" x2="386" y2="74" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="383" y1="84" x2="399" y2="84" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#qg-arr)"/>
 
   <!-- Gate 3 -->
-  <g transform="translate(391, 10)">
-    <rect width="160" height="128" rx="8" fill="#FFB3B3" stroke="#e6a0a0" stroke-width="1"/>
-    <circle cx="80" cy="26" r="14" fill="#CC6666"/>
-    <text x="80" y="31" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" font-weight="700" fill="white">3</text>
-    <text x="80" y="56" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="700" fill="#8b2525">Root cause first</text>
-    <text x="80" y="76" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#4a5568">systematic-debugging</text>
-    <text x="80" y="92" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#4a5568">requires diagnosis</text>
-    <text x="80" y="112" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#9ca3af" font-style="italic">no symptom patches</text>
+  <g transform="translate(404, 14)">
+    <rect width="168" height="140" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+    <rect width="168" height="38" rx="10" fill="#EDE9FE"/>
+    <rect y="28" width="168" height="10" fill="#EDE9FE"/>
+    <circle cx="22" cy="20" r="12" fill="#7C3AED"/>
+    <text x="22" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">3</text>
+    <text x="103" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#5B21B6">Root cause first</text>
+    <text x="84" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">systematic-debugging</text>
+    <text x="84" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">requires diagnosis</text>
+    <rect x="24" y="96" width="120" height="22" rx="11" fill="#F3F4F6"/>
+    <text x="84" y="111" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">no symptom patches</text>
   </g>
 
-  <line x1="556" y1="74" x2="574" y2="74" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="577" y1="84" x2="593" y2="84" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#qg-arr)"/>
 
   <!-- Gate 4 -->
-  <g transform="translate(579, 10)">
-    <rect width="160" height="128" rx="8" fill="#FFB3B3" stroke="#e6a0a0" stroke-width="1"/>
-    <circle cx="80" cy="26" r="14" fill="#CC6666"/>
-    <text x="80" y="31" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" font-weight="700" fill="white">4</text>
-    <text x="80" y="56" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="700" fill="#8b2525">Evidence first</text>
-    <text x="80" y="76" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#4a5568">verification checklist</text>
-    <text x="80" y="92" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#4a5568">all checks must pass</text>
-    <text x="80" y="112" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#9ca3af" font-style="italic">no "done" without proof</text>
+  <g transform="translate(598, 14)">
+    <rect width="168" height="140" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+    <rect width="168" height="38" rx="10" fill="#EDE9FE"/>
+    <rect y="28" width="168" height="10" fill="#EDE9FE"/>
+    <circle cx="22" cy="20" r="12" fill="#7C3AED"/>
+    <text x="22" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">4</text>
+    <text x="103" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#5B21B6">Evidence first</text>
+    <text x="84" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">verification checklist</text>
+    <text x="84" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">all checks must pass</text>
+    <rect x="14" y="96" width="140" height="22" rx="11" fill="#F3F4F6"/>
+    <text x="84" y="111" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">no "done" without proof</text>
   </g>
 
-  <line x1="744" y1="74" x2="762" y2="74" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="771" y1="84" x2="787" y2="84" stroke="#9CA3AF" stroke-width="1.5" marker-end="url(#qg-arr)"/>
 
   <!-- Gate 5 -->
-  <g transform="translate(767, 10)">
-    <rect width="138" height="128" rx="8" fill="#FFB3B3" stroke="#e6a0a0" stroke-width="1"/>
-    <circle cx="69" cy="26" r="14" fill="#CC6666"/>
-    <text x="69" y="31" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" font-weight="700" fill="white">5</text>
-    <text x="69" y="56" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="700" fill="#8b2525">Review first</text>
-    <text x="69" y="76" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#4a5568">parallel swarm</text>
-    <text x="69" y="92" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="11" fill="#4a5568">up to 8 reviewers</text>
-    <text x="69" y="112" text-anchor="middle" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" fill="#9ca3af" font-style="italic">max 3 cycles</text>
+  <g transform="translate(792, 14)">
+    <rect width="150" height="140" rx="10" fill="white" stroke="#C4B5FD" stroke-width="1.5"/>
+    <rect width="150" height="38" rx="10" fill="#EDE9FE"/>
+    <rect y="28" width="150" height="10" fill="#EDE9FE"/>
+    <circle cx="22" cy="20" r="12" fill="#7C3AED"/>
+    <text x="22" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="white">5</text>
+    <text x="90" y="25" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#5B21B6">Review first</text>
+    <text x="75" y="60" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">parallel swarm</text>
+    <text x="75" y="78" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">up to 8 reviewers</text>
+    <rect x="20" y="96" width="110" height="22" rx="11" fill="#F3F4F6"/>
+    <text x="75" y="111" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#9CA3AF">max 3 cycles</text>
   </g>
 </svg>

@@ -128,6 +128,26 @@ Every goal flows through a structured lifecycle. Each phase has dedicated [comma
 
 ---
 
+## Deep Research (`/deep-research`)
+
+Spawns 5 research agents in parallel before planning, then synthesizes findings into a unified research brief.
+
+<p align="center">
+  <img src="docs/images/research-swarm.svg" alt="Research swarm — 5 parallel research agents feeding into research-synthesizer" width="75%">
+</p>
+
+---
+
+## Wave Orchestration (`/orchestrate`)
+
+Groups plan tasks by dependency into waves. Independent tasks within each wave run in parallel; an [`integration-verifier`](.claude/agents/integration-verifier.md) validates between waves.
+
+<p align="center">
+  <img src="docs/images/wave-orchestration.svg" alt="Wave orchestration — 3 waves with parallel tasks and integration verification" width="80%">
+</p>
+
+---
+
 ## Four coordination modes
 
 | Mode | Mechanism | When to use |
