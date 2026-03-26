@@ -26,10 +26,15 @@
 - GEMINI.md and CODEX.md files don't exist in the repo — link to external GitHub URLs instead.
 - ops/TASKS.md is generated at runtime, not committed — don't link to it in README.
 
+- **grep -oP is NOT portable** — BSD grep on macOS lacks -P flag. Use `sed -n 's/pattern/\1/p'` instead. See: ops/solutions/2026-03-26-grep-posix-portability.md
+- **Hooks require .claude/settings.json** — scripts alone aren't enough. Must register hooks in settings.json with event type, path, and timeout. See: ops/solutions/2026-03-26-settings-json-required-for-hooks.md
 - ship-loop.sh (Stop hook) only blocks the session that activated it — won't affect other sessions.
 - context-monitor.sh state file (.claude/context-monitor.local.md) must be cleaned between sessions — session-start.sh handles this.
+- context-monitor.sh: unknown tools should reset the read counter (not increment it) to avoid false paralysis warnings.
 - Gemini CLI's GEMINI.md files have a prompt injection risk when loading from untrusted sources.
 - Codex CLI uses lazy loading for skills — only loads full body when relevant.
+- When Gemini writes to ops/MEMORY.md or ops/CONTRACTS.md, always specify `(append)` — without it, Gemini may overwrite existing content.
+- Every skill must have an explicit `## Output` section — agents need to know what artifact to produce.
 
 ## Interface proposals
 <!-- No active proposals -->

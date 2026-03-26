@@ -1,5 +1,27 @@
 # Changelog
 
+## [2026-03-26] — Diagram redesign, full audit, and framework hardening
+
+### Claude Code
+- Redesigned ALL diagrams to match Blueprint's dark-badge + white-pill visual grammar
+  - hero-banner: navy+gold matching Blueprint exactly (#1a1a2e→#16213e→#0f3460, #D4A574)
+  - 5 existing diagrams rebuilt: sprint-lifecycle (pipeline view), review-swarm, knowledge-loop, quality-gates
+  - 6 new diagrams created: research-swarm, wave-orchestration, planning-flow, testing-flow, debug-flow, context-recovery
+- Added README sections: Planning Pipeline, Deep Research, Wave Orchestration, Review Swarm, Test Pipeline, Debugging, Context Recovery
+- **Critical fix:** replaced grep -oP (Perl regex) with POSIX sed in ship-loop.sh and context-monitor.sh — was silently failing on macOS
+- **Critical fix:** created .claude/settings.json to register all 3 hooks (were never firing)
+- **Critical fix:** updated CLAUDE.md from 14→18 agents, 11→12 skills, added scope-cutting, fixed GEMINI.md/CODEX.md references
+- Fixed ship.md: added (append) directive for MEMORY.md/CONTRACTS.md
+- Fixed wrap.md: added <promise>DONE</promise> completion marker
+- Fixed context-monitor.sh: expanded tool classification, unknown tools now reset read counter
+- Added "Do NOT flag" suppressions to test-gap-analyzer
+- Added Output sections to 9 skills that lacked them
+- Made wave-orchestration fully model-agnostic (removed subagent/worktree references)
+- Added Flags sections to /build and /ship commands
+- Fixed session-start.sh: removed unused variables, wired up HAS_GOALS
+- Fixed README structure tree: removed nonexistent GEMINI.md/CODEX.md, corrected agent count
+- 3 full audit passes (5 parallel agents each) until zero defects
+
 ## [2026-03-24] — README overhaul and SVG diagram redesign
 
 ### Claude Code
