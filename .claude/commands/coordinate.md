@@ -15,10 +15,13 @@ Write the ship-loop state file to activate the inner loop guard:
 ```
 Create .claude/ship-loop.local.md with:
 ---
+active: true
+session_id: "<current-branch-name>"
 iteration: 0
 max_iterations: 5
+completion_promise: "DONE"
 ---
-[The goal and context]
+<the goal description from $ARGUMENTS>
 ```
 
 ## Execute the full lifecycle

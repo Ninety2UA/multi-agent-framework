@@ -1,52 +1,150 @@
-#!/bin/bash
-# Ship Loop — Stop hook (inner loop)
-# Prevents premature session exit during active sprints.
-# Re-feeds the task prompt up to 5 iterations.
-# Only blocks the session that started the loop.
+#!/usr/bin/env bash
+# ship-loop.sh — Stop hook for /ship premature-exit prevention (inner guard)
 #
-# Hook event: Stop
-# Configuration: add to .claude/settings.json hooks.Stop
+# Prevents Claude from giving up before the pipeline is done.
+# This is the INNER guard — it blocks premature exit within a single session.
+#
+# For true context-exhaustion recovery with fresh context per iteration,
+# use the OUTER loop: scripts/coordinate.sh (external bash loop).
+#
+# State file: .claude/ship-loop.local.md (YAML frontmatter + prompt body)
+# Activation: /ship or /coordinate creates the state file
+# Termination: <promise>DONE</promise> in last assistant output, or max iterations (default 5)
+#
+# This hook is session-isolated — it only blocks exit for the session that started the loop.
 
-STATE_FILE=".claude/ship-loop.local.md"
+set -euo pipefail
 
-# If no state file, sprint is not active — allow exit
-if [ ! -f "$STATE_FILE" ]; then
-  exit 0
-fi
+SHIP_STATE_FILE=".claude/ship-loop.local.md"
 
-# Read iteration count from state file (POSIX-compatible — no grep -P on BSD/macOS)
-ITERATION=$(sed -n 's/^iteration: \([0-9]*\).*/\1/p' "$STATE_FILE" 2>/dev/null)
-ITERATION="${ITERATION:-0}"
-MAX_ITERATIONS=$(sed -n 's/^max_iterations: \([0-9]*\).*/\1/p' "$STATE_FILE" 2>/dev/null)
-MAX_ITERATIONS="${MAX_ITERATIONS:-5}"
-# Read hook input from stdin (Claude Code delivers Stop hook data as JSON on stdin)
+# --------------------------------------------------
+# 1. Read hook input from stdin (JSON from Claude Code)
+# --------------------------------------------------
 HOOK_INPUT=$(cat)
-LAST_MESSAGE=$(echo "$HOOK_INPUT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('last_assistant_message',''))" 2>/dev/null || echo "")
 
-# Check for completion signal in recent assistant output
-if echo "$LAST_MESSAGE" | grep -q '<promise>DONE</promise>'; then
-  # Sprint complete — clean up and allow exit
-  rm -f "$STATE_FILE"
+# --------------------------------------------------
+# 2. Check if a ship loop is active
+# --------------------------------------------------
+if [[ ! -f "$SHIP_STATE_FILE" ]]; then
+  exit 0  # No active loop — allow exit
+fi
+
+# --------------------------------------------------
+# 3. Parse state file frontmatter
+# --------------------------------------------------
+FRONTMATTER=$(awk '/^---$/{i++; next} i==1{print} i>=2{exit}' "$SHIP_STATE_FILE")
+
+ACTIVE=$(echo "$FRONTMATTER" | grep '^active:' | sed 's/active: *//')
+if [[ "$ACTIVE" != "true" ]]; then
+  exit 0  # Loop not active — allow exit
+fi
+
+# --------------------------------------------------
+# 4. Session isolation — only block the session that started the loop
+# --------------------------------------------------
+STATE_SESSION=$(echo "$FRONTMATTER" | grep '^session_id:' | sed 's/session_id: *//' | tr -d '"')
+HOOK_SESSION=$(echo "$HOOK_INPUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('session_id',''))" 2>/dev/null || echo "")
+
+if [[ -n "$STATE_SESSION" ]] && [[ -n "$HOOK_SESSION" ]] && [[ "$STATE_SESSION" != "$HOOK_SESSION" ]]; then
+  exit 0  # Different session — don't interfere
+fi
+
+# --------------------------------------------------
+# 5. Parse iteration state
+# --------------------------------------------------
+ITERATION=$(echo "$FRONTMATTER" | grep '^iteration:' | sed 's/iteration: *//')
+MAX_ITERATIONS=$(echo "$FRONTMATTER" | grep '^max_iterations:' | sed 's/max_iterations: *//')
+COMPLETION_PROMISE=$(echo "$FRONTMATTER" | grep '^completion_promise:' | sed 's/completion_promise: *//' | tr -d '"')
+
+# Defaults
+COMPLETION_PROMISE="${COMPLETION_PROMISE:-DONE}"
+
+# Validate numeric fields
+if ! [[ "$ITERATION" =~ ^[0-9]+$ ]]; then
+  echo "Ship loop: Invalid iteration count. Cleaning up." >&2
+  rm -f "$SHIP_STATE_FILE"
   exit 0
 fi
 
-# Check iteration limit
-if [ "$ITERATION" -ge "$MAX_ITERATIONS" ]; then
-  echo "Ship loop: max iterations ($MAX_ITERATIONS) reached. Allowing exit. Sprint may be incomplete." >&2
-  rm -f "$STATE_FILE"
+if ! [[ "$MAX_ITERATIONS" =~ ^[0-9]+$ ]]; then
+  echo "Ship loop: Invalid max_iterations. Cleaning up." >&2
+  rm -f "$SHIP_STATE_FILE"
   exit 0
 fi
 
-# Increment iteration and update state file
-NEW_ITERATION=$((ITERATION + 1))
-sed -i.bak "s/iteration: $ITERATION/iteration: $NEW_ITERATION/" "$STATE_FILE"
-rm -f "${STATE_FILE}.bak"
+# --------------------------------------------------
+# 6. Check max iterations
+# --------------------------------------------------
+if [[ "$MAX_ITERATIONS" -gt 0 ]] && [[ "$ITERATION" -ge "$MAX_ITERATIONS" ]]; then
+  echo "Ship loop: Max iterations ($MAX_ITERATIONS) reached." >&2
+  rm -f "$SHIP_STATE_FILE"
+  exit 0  # Allow exit
+fi
 
-# Block exit — re-inject prompt
-echo "Ship loop: iteration $NEW_ITERATION/$MAX_ITERATIONS — sprint not complete yet."
-echo ""
-echo "Continue working on the sprint. Check ops/TASKS.md for remaining tasks."
-echo "When ALL work is verified complete, emit: <promise>DONE</promise>"
+# --------------------------------------------------
+# 7. Check for completion promise in last assistant output
+# --------------------------------------------------
+TRANSCRIPT_PATH=$(echo "$HOOK_INPUT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('transcript_path',''))" 2>/dev/null || echo "")
 
-# Exit code 2 = block exit and send feedback
+if [[ -n "$TRANSCRIPT_PATH" ]] && [[ -f "$TRANSCRIPT_PATH" ]]; then
+  # Extract last assistant text from JSONL transcript
+  LAST_OUTPUT=$(grep '"role":"assistant"' "$TRANSCRIPT_PATH" 2>/dev/null | tail -n 50 | python3 -c "
+import sys, json
+lines = sys.stdin.readlines()
+for line in reversed(lines):
+    try:
+        msg = json.loads(line)
+        contents = msg.get('message', {}).get('content', [])
+        for c in contents:
+            if c.get('type') == 'text':
+                print(c.get('text', ''))
+                sys.exit(0)
+    except:
+        continue
+print('')
+" 2>/dev/null || echo "")
+
+  # Check for completion promise using exact match
+  if [[ -n "$COMPLETION_PROMISE" ]] && [[ -n "$LAST_OUTPUT" ]]; then
+    # Extract text between <promise> tags
+    PROMISE_TEXT=$(echo "$LAST_OUTPUT" | perl -0777 -pe 's/.*?<promise>(.*?)<\/promise>.*/$1/s; s/^\s+|\s+$//g; s/\s+/ /g' 2>/dev/null || echo "")
+
+    if [[ "$PROMISE_TEXT" = "$COMPLETION_PROMISE" ]]; then
+      echo "Ship loop: Completion promise fulfilled. Pipeline done." >&2
+      rm -f "$SHIP_STATE_FILE"
+      exit 0  # Allow exit — work is done
+    fi
+  fi
+fi
+
+# --------------------------------------------------
+# 8. Increment iteration and re-feed prompt
+# --------------------------------------------------
+NEXT_ITERATION=$((ITERATION + 1))
+
+# Atomically update iteration counter
+TEMP_FILE="${SHIP_STATE_FILE}.tmp.$$"
+sed "s/^iteration: .*/iteration: $NEXT_ITERATION/" "$SHIP_STATE_FILE" > "$TEMP_FILE"
+mv "$TEMP_FILE" "$SHIP_STATE_FILE"
+
+# Extract prompt text (everything after second ---)
+PROMPT_TEXT=$(awk '/^---$/{i++; next} i>=2' "$SHIP_STATE_FILE")
+
+if [[ -z "$PROMPT_TEXT" ]]; then
+  echo "Ship loop: No prompt text in state file. Cleaning up." >&2
+  rm -f "$SHIP_STATE_FILE"
+  exit 0
+fi
+
+# --------------------------------------------------
+# 9. Block exit and re-feed the prompt
+# --------------------------------------------------
+cat <<EOF
+{
+  "decision": "block",
+  "reason": "$PROMPT_TEXT",
+  "systemMessage": "Ship loop iteration $NEXT_ITERATION/$MAX_ITERATIONS | To complete: output <promise>$COMPLETION_PROMISE</promise> (ONLY when ALL work is done and verified)"
+}
+EOF
+
 exit 2
