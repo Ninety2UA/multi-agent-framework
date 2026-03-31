@@ -30,6 +30,8 @@ completion_promise: "DONE"
 Invoke Gemini with codebase-mapping skill (skip if unnecessary):
 ```bash
 gemini -p "$(cat .claude/skills/codebase-mapping/SKILL.md) Analyze the full codebase. Write to ops/ARCHITECTURE.md, ops/MEMORY.md (append), ops/CONTRACTS.md (append)." > /tmp/gemini_phase0.txt 2>&1 &
+GEMINI_PID=$!
+wait $GEMINI_PID
 ```
 Read updated ops/ files after completion.
 
@@ -37,7 +39,7 @@ Read updated ops/ files after completion.
 Spawn `learnings-researcher` agent to search ops/solutions/ and ops/decisions/.
 
 ### Phase 1: Planning
-Follow `writing-plans` and `shadow-path-tracing` skills. Embed CONTRACTS.md types. Group into waves. Write TASKS.md.
+Follow `writing-plans` and `shadow-path-tracing` skills. Embed ops/CONTRACTS.md types. Group into waves. Write ops/TASKS.md.
 
 ### Phase 1.5: Plan validation
 Spawn `plan-checker` agent. Iterate until APPROVED (max 3 rounds).
@@ -51,18 +53,20 @@ Launch Gemini + Codex (background bash) + Claude review agents simultaneously:
 - security-sentinel agent
 - performance-oracle agent
 - code-simplicity-reviewer agent
+- convention-enforcer agent
+- architecture-strategist agent
 
 ### Phase 4: Process reviews
 Spawn `findings-synthesizer`. Apply `iterative-refinement` skill. Fix P1+P2. Loop if needed (max 3 cycles).
 
 ### Phase 5: Test
-Spawn `test-gap-analyzer`. Invoke Codex with TDD skill. Fix failures until green.
+Spawn `test-gap-analyzer`. Invoke Codex with TDD skill. Fix failures until green (max 3 cycles).
 
 ### Phase 6: Wrap up
 - Apply `knowledge-compounding` (document to ops/solutions/ if non-trivial)
 - Update ops/CHANGELOG.md, ops/MEMORY.md, ops/TASKS.md
-- Archive review files to ops/archive/[date]/
-- Apply `verification-before-completion` checklist
+- Archive review files to ops/archive/[today's date]/
+- Apply `verification-before-completion` skill
 - Write ops/STATE.md
 - Remove .claude/ship-loop.local.md
 - Sprint summary for user

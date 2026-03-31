@@ -73,6 +73,7 @@ For each review comment:
 ```
 
 ## Rules
+- Before fetching PR comments, verify `gh` is available: run `gh auth status`. If not authenticated or not installed, halt and report BLOCKED with instructions to run `gh auth login`.
 - Never argue with reviewers in code — implement their requests or flag for discussion
 - If a requested change would break something, explain what and suggest an alternative
 - Run tests after EVERY change, not just at the end

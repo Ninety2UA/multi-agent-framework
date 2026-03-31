@@ -38,7 +38,7 @@ Follow the `systematic-debugging` skill:
 2. Run the failing test from Step 1 — it should now pass
 3. Run the full test suite — no regressions
 4. Check if similar patterns exist elsewhere (grep for same anti-pattern)
-   - If found: create tasks in TASKS.md for those instances
+   - If found: create tasks in ops/TASKS.md for those instances
 
 ## Step 4: Document
 

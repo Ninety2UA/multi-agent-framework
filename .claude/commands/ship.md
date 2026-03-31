@@ -39,6 +39,8 @@ Spawn the `learnings-researcher` agent to search ops/solutions/ and ops/decision
 Invoke Gemini CLI with the codebase-mapping skill (skip if codebase unchanged or small fix):
 ```bash
 gemini -p "$(cat .claude/skills/codebase-mapping/SKILL.md) Analyze the full codebase. Write to ops/ARCHITECTURE.md, ops/MEMORY.md (append), ops/CONTRACTS.md (append)." > /tmp/gemini_phase0.txt 2>&1 &
+GEMINI_PID=$!
+wait $GEMINI_PID
 ```
 
 ### Phase 1: Planning
@@ -75,7 +77,7 @@ Spawn the `findings-synthesizer` agent. Apply `iterative-refinement` skill.
 ### Phase 6: Wrap up
 - Apply `knowledge-compounding` skill (document solutions to ops/solutions/)
 - Update ops/CHANGELOG.md, ops/MEMORY.md, ops/TASKS.md
-- Archive review files to ops/archive/[date]/
+- Archive review files to ops/archive/[today's date]/
 - Apply `verification-before-completion` skill (all checks must pass)
 - Write ops/STATE.md for session handoff
 - Remove .claude/ship-loop.local.md

@@ -137,14 +137,12 @@ if [[ -z "$PROMPT_TEXT" ]]; then
 fi
 
 # --------------------------------------------------
-# 9. Block exit and re-feed the prompt
+# 9. Block exit and re-feed the prompt (JSON-safe encoding)
 # --------------------------------------------------
-cat <<EOF
-{
-  "decision": "block",
-  "reason": "$PROMPT_TEXT",
-  "systemMessage": "Ship loop iteration $NEXT_ITERATION/$MAX_ITERATIONS | To complete: output <promise>$COMPLETION_PROMISE</promise> (ONLY when ALL work is done and verified)"
-}
-EOF
+REASON_JSON=$(printf '%s' "$PROMPT_TEXT" | python3 -c "import sys,json; print(json.dumps(sys.stdin.read()))")
+SYS_MSG="Ship loop iteration $NEXT_ITERATION/$MAX_ITERATIONS | To complete: output <promise>$COMPLETION_PROMISE</promise> (ONLY when ALL work is done and verified)"
+SYS_MSG_JSON=$(printf '%s' "$SYS_MSG" | python3 -c "import sys,json; print(json.dumps(sys.stdin.read()))")
+
+printf '{\n  "decision": "block",\n  "reason": %s,\n  "systemMessage": %s\n}\n' "$REASON_JSON" "$SYS_MSG_JSON"
 
 exit 2

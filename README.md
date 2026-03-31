@@ -385,7 +385,7 @@ claude
 |---|---|---|
 | [**`/plan <goal>`**](.claude/commands/plan.md) | 0 → 1.5 | Analyze codebase, plan with shadow paths, validate via [`plan-checker`](.claude/agents/plan-checker.md) |
 | [**`/build`**](.claude/commands/build.md) | 2 | [Wave orchestration](.claude/skills/wave-orchestration/SKILL.md) build. `--team` for [agent team](.claude/agents/team-lead.md) mode. |
-| [**`/review`**](.claude/commands/review.md) | 3 → 4 | Parallel review + [synthesis](.claude/agents/findings-synthesizer.md). `--full` for all 8 reviewers. |
+| [**`/review`**](.claude/commands/review.md) | 3 → 4 | Parallel review + [synthesis](.claude/agents/findings-synthesizer.md). `--full` for all 7 reviewers. |
 | [**`/test`**](.claude/commands/test.md) | 5 | [Gap analysis](.claude/agents/test-gap-analyzer.md) + [Codex](https://github.com/openai/codex) TDD. `--gaps-only` to just identify gaps. |
 | [**`/wrap`**](.claude/commands/wrap.md) | 6 | [Compound knowledge](.claude/skills/knowledge-compounding/SKILL.md), archive reviews, write [`STATE.md`](ops/STATE.md). |
 

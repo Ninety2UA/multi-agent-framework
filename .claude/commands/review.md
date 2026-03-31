@@ -60,7 +60,7 @@ Wait for all reviewers to complete.
 ## Phase 4: Synthesize findings
 
 1. Spawn the `findings-synthesizer` agent
-2. It reads REVIEW_GEMINI.md, REVIEW_CODEX.md, and subagent outputs
+2. It reads ops/REVIEW_GEMINI.md, ops/REVIEW_CODEX.md, and subagent outputs
 3. Produces synthesized report with confidence tiering (HIGH/MEDIUM/LOW) and priority (P1/P2/P3)
 4. Apply `iterative-refinement` skill:
    - Fix P1 (critical) immediately

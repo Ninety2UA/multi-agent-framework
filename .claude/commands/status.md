@@ -53,12 +53,15 @@ Present a concise status:
 - /review — trigger parallel review
 - /test — run test phase
 - /ship <goal> — full autonomous sprint
+- /coordinate <goal> — full sprint with exit guard
 - /quick <change> — lightweight fix
 - /debug <bug> — structured debugging
 - /deep-research <topic> — research swarm
+- /analyze <url> — compatibility analysis of external repo
 - /pause — save checkpoint
 - /resume — continue from checkpoint
 - /wrap — clean session end
 - /compound — document a solution
+- /resolve-pr <PR#> — resolve PR review comments
 - /status — this command
 ```
