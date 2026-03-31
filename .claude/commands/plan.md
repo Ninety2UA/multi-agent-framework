@@ -31,7 +31,7 @@ Wait for completion, then read updated ops/ files.
 
 Follow the `writing-plans` skill:
 
-1. Read: GOALS.md, ARCHITECTURE.md, CONTRACTS.md, MEMORY.md, TASKS.md, learnings-researcher output
+1. Read: ops/GOALS.md, ops/ARCHITECTURE.md, ops/CONTRACTS.md, ops/MEMORY.md, ops/TASKS.md, learnings-researcher output
 2. Decompose goal into atomic tasks (1-2 hours each)
 3. Assign using the heuristic matrix:
    - Produces code → Claude

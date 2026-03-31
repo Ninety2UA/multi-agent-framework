@@ -19,8 +19,12 @@ ITERATION=$(sed -n 's/^iteration: \([0-9]*\).*/\1/p' "$STATE_FILE" 2>/dev/null)
 ITERATION="${ITERATION:-0}"
 MAX_ITERATIONS=$(sed -n 's/^max_iterations: \([0-9]*\).*/\1/p' "$STATE_FILE" 2>/dev/null)
 MAX_ITERATIONS="${MAX_ITERATIONS:-5}"
+# Read hook input from stdin (Claude Code delivers Stop hook data as JSON on stdin)
+HOOK_INPUT=$(cat)
+LAST_MESSAGE=$(echo "$HOOK_INPUT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('last_assistant_message',''))" 2>/dev/null || echo "")
+
 # Check for completion signal in recent assistant output
-if echo "$CLAUDE_STOP_ASSISTANT_MESSAGE" 2>/dev/null | grep -q '<promise>DONE</promise>'; then
+if echo "$LAST_MESSAGE" | grep -q '<promise>DONE</promise>'; then
   # Sprint complete — clean up and allow exit
   rm -f "$STATE_FILE"
   exit 0

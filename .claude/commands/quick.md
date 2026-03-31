@@ -31,8 +31,8 @@ Implement the fix directly. No subagents, no wave orchestration — just do it.
 
 ### 5. Lightweight review (self-review)
 Review your own change through these lenses:
-- Does it match CONTRACTS.md types?
-- Does it follow patterns in MEMORY.md?
+- Does it match ops/CONTRACTS.md types?
+- Does it follow patterns in ops/MEMORY.md?
 - Any obvious security issues? (injection, auth, data exposure)
 - Any performance concerns? (N+1, O(n²), unbounded)
 

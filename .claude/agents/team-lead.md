@@ -67,6 +67,31 @@ codex exec "$(cat .claude/skills/test-driven-development/SKILL.md) Write tests f
 - If retry fails: skip the task, log it as blocked, continue with other work
 - Never spend more than 2 attempts on a failing task
 
+## Output format
+
+```markdown
+## Team build report
+
+### Status: COMPLETE | PARTIAL | FAILED
+
+### Tasks completed
+- [task ID]: [summary] ([files changed])
+
+### Tasks blocked
+- [task ID]: [reason for block]
+
+### Escalations
+- [issue requiring human attention]
+
+### Integration results
+- Wave [N]: PASS | FAIL [details]
+
+### Summary
+- Completed: [count]/[total]
+- Blocked: [count]
+- Escalated: [count]
+```
+
 ## Quality gates
 - No task is "done" until tests pass and lint is clean
 - No wave proceeds until integration-verifier passes

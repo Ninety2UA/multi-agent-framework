@@ -9,7 +9,7 @@ You are executing Phase 3 + Phase 4 of the multi-agent framework (parallel revie
 $ARGUMENTS
 
 Flags:
-- `--full` — Run ALL review agents (Gemini + Codex + security-sentinel + performance-oracle + code-simplicity-reviewer + convention-enforcer)
+- `--full` — Run ALL review agents (Gemini + Codex + security-sentinel + performance-oracle + code-simplicity-reviewer + convention-enforcer + architecture-strategist)
 - `--security` — Add security-sentinel to default reviewers
 - `--perf` — Add performance-oracle to default reviewers
 - `--simple` — Add code-simplicity-reviewer to default reviewers
@@ -42,13 +42,16 @@ RULE: [LOW] confidence can NEVER be P1.
 DO NOT FLAG: test fixture hardcoded values, readability redundancy, dev-only config, sufficient assertions, already-addressed issues.
 Write findings to ops/REVIEW_CODEX.md." > /tmp/codex_review.txt 2>&1 &
 CODEX_PID=$!
+
+# Wait for external reviewers before synthesis
+wait $GEMINI_PID $CODEX_PID
 ```
 
 ### Conditionally launch Claude subagent reviewers:
 - If `--full` or `--security` → spawn `security-sentinel` agent
 - If `--full` or `--perf` → spawn `performance-oracle` agent
 - If `--full` or `--simple` → spawn `code-simplicity-reviewer` agent
-- If `--full` → also spawn `convention-enforcer` agent
+- If `--full` → also spawn `convention-enforcer` and `architecture-strategist` agents
 
 Launch all applicable subagents in a SINGLE message for maximum parallelism.
 

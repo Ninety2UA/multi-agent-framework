@@ -7,7 +7,10 @@
 # Configuration: add to .claude/settings.json hooks.PostToolUse
 
 STATE_FILE=".claude/context-monitor.local.md"
-TOOL_NAME="${CLAUDE_TOOL_NAME:-unknown}"
+
+# Read hook input from stdin (Claude Code delivers PostToolUse data as JSON on stdin)
+HOOK_INPUT=$(cat)
+TOOL_NAME=$(echo "$HOOK_INPUT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('tool_name','unknown'))" 2>/dev/null || echo "unknown")
 
 # Initialize state file if it doesn't exist
 if [ ! -f "$STATE_FILE" ]; then

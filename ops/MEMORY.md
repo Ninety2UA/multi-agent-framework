@@ -29,12 +29,14 @@
 - **grep -oP is NOT portable** — BSD grep on macOS lacks -P flag. Use `sed -n 's/pattern/\1/p'` instead. See: ops/solutions/2026-03-26-grep-posix-portability.md
 - **Hooks require .claude/settings.json with correct format** — scripts alone aren't enough. Each hook entry needs `{ "matcher": "...", "hooks": [{ "type": "command", "command": "..." }] }`. The flat format `{ "command": "...", "timeout": ... }` causes Claude Code to skip the entire settings file. See: ops/solutions/2026-03-26-settings-json-required-for-hooks.md
 - ship-loop.sh (Stop hook) only blocks the session that activated it — won't affect other sessions.
-- context-monitor.sh state file (.claude/context-monitor.local.md) must be cleaned between sessions — session-start.sh handles this.
+- context-monitor.sh state file (.claude/context-monitor.local.md) must be cleaned between sessions — session-start.sh does this via `rm -f` on startup.
 - context-monitor.sh: unknown tools should reset the read counter (not increment it) to avoid false paralysis warnings.
 - Gemini CLI's GEMINI.md files have a prompt injection risk when loading from untrusted sources.
 - Codex CLI uses lazy loading for skills — only loads full body when relevant.
 - When Gemini writes to ops/MEMORY.md or ops/CONTRACTS.md, always specify `(append)` — without it, Gemini may overwrite existing content.
 - Every skill must have an explicit `## Output` section — agents need to know what artifact to produce.
+- **Hooks receive data via stdin JSON, NOT environment variables** — `$CLAUDE_TOOL_NAME`, `$CLAUDE_STOP_ASSISTANT_MESSAGE` etc. do not exist. Parse stdin with `python3 -c "import sys,json; ..."`. See: ops/solutions/2026-03-31-hooks-stdin-json-parsing.md
+- **Every agent must have an `## Output format` section** — the calling command needs structured output to parse. team-lead was the only agent missing this.
 
 ## Interface proposals
 <!-- No active proposals -->

@@ -44,8 +44,10 @@ For a given bug or behavior:
 
 ```bash
 git log -p -S "[code pattern]" -- [file]
-git bisect (if needed)
+git log --all --oneline -S "[code pattern]"  # non-interactive alternative to bisect
 ```
+
+Note: `git bisect` is interactive and cannot be used in this agent context. Use `git log -S` (pickaxe search) instead.
 
 ### 4. Refactoring impact assessment
 Before refactoring:

@@ -71,7 +71,7 @@ Spawn the `findings-synthesizer` agent. Apply `iterative-refinement` skill.
 
 ### Phase 6: Wrap up
 - Apply `knowledge-compounding` skill (document solutions to ops/solutions/)
-- Update CHANGELOG.md, MEMORY.md, TASKS.md
+- Update ops/CHANGELOG.md, ops/MEMORY.md, ops/TASKS.md
 - Archive review files to ops/archive/[date]/
 - Apply `verification-before-completion` skill (all checks must pass)
 - Write ops/STATE.md for session handoff

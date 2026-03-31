@@ -309,13 +309,22 @@ Add to `.claude/settings.json`:
   },
   "hooks": {
     "SessionStart": [
-      { "command": ".claude/hooks/session-start.sh", "timeout": 5000 }
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": ".claude/hooks/session-start.sh" }]
+      }
     ],
     "Stop": [
-      { "command": ".claude/hooks/ship-loop.sh", "timeout": 10000 }
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": ".claude/hooks/ship-loop.sh" }]
+      }
     ],
     "PostToolUse": [
-      { "command": ".claude/hooks/context-monitor.sh", "timeout": 5000 }
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": ".claude/hooks/context-monitor.sh" }]
+      }
     ]
   }
 }

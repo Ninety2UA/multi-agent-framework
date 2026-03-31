@@ -1,10 +1,29 @@
 # Changelog
 
-## [2026-03-31] — Fix hooks settings.json format
+## [2026-03-31] — Comprehensive framework audit and fix pass
 
 ### Claude Code
 - **Critical fix:** `.claude/settings.json` hooks used flat format (`{ "command": "...", "timeout": ... }`) which Claude Code rejects — migrated to correct `{ "matcher": "...", "hooks": [{ "type": "command", "command": "..." }] }` format
+- **Critical fix:** `ship-loop.sh` read `$CLAUDE_STOP_ASSISTANT_MESSAGE` env var (doesn't exist) — now parses stdin JSON for `last_assistant_message`. Completion detection was completely broken.
+- **Critical fix:** `context-monitor.sh` read `$CLAUDE_TOOL_NAME` env var (doesn't exist) — now parses stdin JSON for `tool_name`. Analysis paralysis detection was completely broken.
+- **Critical fix:** `README.md` Getting Started section shipped broken flat-format hook config — updated to correct matcher/hooks array format
+- **Critical fix:** `coordinate.md` ran full Phase 0-6 sprint without ship-loop activation — added state file creation, `<promise>DONE</promise>`, and cleanup
+- **High fix:** `session-start.sh` now cleans stale `context-monitor.local.md` on session start (was documented in MEMORY.md but never implemented)
+- **High fix:** `build.md` hardcoded `src/auth/` paths in agent team code block — replaced with `<scope>` placeholders
+- **High fix:** `deep-research.md` Gemini invocation now injects `codebase-mapping` skill (was the only Gemini call without it)
+- **High fix:** `review.md` added `wait $GEMINI_PID $CODEX_PID` — synthesis could read incomplete review files
+- **High fix:** `test.md` codex exec now uses `> /tmp/codex_test.txt 2>&1 &` pattern with PID capture and wait
+- **High fix:** `security-sentinel.md` removed unnecessary Bash tool (static analysis reviewer, least-privilege)
+- **High fix:** `team-lead.md` added structured output format (was the only agent without one)
+- **High fix:** `wave-orchestration` SKILL.md team mode section flagged as Claude-specific with experimental note
+- **Medium fix:** Fixed missing `ops/` prefixes in `ship.md`, `plan.md`, `quick.md`, `coordinate.md`
+- **Medium fix:** `review.md --full` now includes `architecture-strategist` agent (was designed for Phase 3 but never included)
+- **Medium fix:** `plan-checker.md` now accepts "Claude subagent" as valid assignment category (was causing false NEEDS_REVISION)
+- **Medium fix:** `git-history-analyzer.md` replaced interactive `git bisect` with non-interactive `git log -S` alternative
+- **Medium fix:** `deployment-verifier.md` added explicit "never execute rollbacks" safety rule
+- **Medium fix:** `session-start.sh` replaced `echo -e` with POSIX-portable `printf '%b\n'`
 - Updated ops/solutions/2026-03-26-settings-json-required-for-hooks.md with correct format documentation
+- 5 parallel audit agents found 4 CRITICAL, 10 HIGH, ~20 MEDIUM issues across all framework components
 
 ## [2026-03-26] — Diagram redesign, full audit, and framework hardening
 

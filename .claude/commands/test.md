@@ -51,7 +51,9 @@ FOR EACH TEST TASK:
 AFTER TESTING:
 - Write results to ops/TEST_RESULTS.md
 - Update ops/CHANGELOG.md
-- If tests fail on existing code, log as tasks assigned to Claude in ops/TASKS.md"
+- If tests fail on existing code, log as tasks assigned to Claude in ops/TASKS.md" > /tmp/codex_test.txt 2>&1 &
+CODEX_PID=$!
+wait $CODEX_PID
 ```
 
 ## Step 3: Process test results

@@ -6,6 +6,9 @@
 # Hook event: SessionStart
 # Configuration: add to .claude/settings.json hooks.SessionStart
 
+# Clean stale state files from previous sessions
+rm -f .claude/context-monitor.local.md
+
 # Check for existing state
 HAS_STATE=""
 HAS_TASKS=""
@@ -64,7 +67,7 @@ if [ -z "$MSG" ]; then
   MSG="\nNo active sprint. Use /plan <goal> to start or /ship <goal> for full autonomous mode."
 fi
 
-echo -e "Multi-agent framework ready.$MSG"
+printf '%b\n' "Multi-agent framework ready.$MSG"
 echo ""
 echo "Commands: /ship /plan /build /review /test /debug /quick /deep-research /status /pause /resume /wrap /compound"
 

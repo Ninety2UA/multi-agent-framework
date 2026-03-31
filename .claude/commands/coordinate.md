@@ -8,6 +8,19 @@ You are running a full multi-agent sprint cycle. Follow docs/multi-agent-framewo
 ## Goal
 $ARGUMENTS
 
+## Activation
+
+Write the ship-loop state file to activate the inner loop guard:
+
+```
+Create .claude/ship-loop.local.md with:
+---
+iteration: 0
+max_iterations: 5
+---
+[The goal and context]
+```
+
 ## Execute the full lifecycle
 
 ### Phase 0: Codebase analysis
@@ -31,7 +44,10 @@ Use wave orchestration. Subagent mode for < 5 tasks, agent team mode for 5+.
 Run `integration-verifier` between waves. Apply risk scoring.
 
 ### Phase 3: Parallel review
-Launch Gemini + Codex (background bash) + relevant Claude review agents (subagents) simultaneously.
+Launch Gemini + Codex (background bash) + Claude review agents simultaneously:
+- security-sentinel agent
+- performance-oracle agent
+- code-simplicity-reviewer agent
 
 ### Phase 4: Process reviews
 Spawn `findings-synthesizer`. Apply `iterative-refinement` skill. Fix P1+P2. Loop if needed (max 3 cycles).
@@ -41,8 +57,12 @@ Spawn `test-gap-analyzer`. Invoke Codex with TDD skill. Fix failures until green
 
 ### Phase 6: Wrap up
 - Apply `knowledge-compounding` (document to ops/solutions/ if non-trivial)
-- Update CHANGELOG.md, MEMORY.md, TASKS.md
+- Update ops/CHANGELOG.md, ops/MEMORY.md, ops/TASKS.md
 - Archive review files to ops/archive/[date]/
 - Apply `verification-before-completion` checklist
 - Write ops/STATE.md
+- Remove .claude/ship-loop.local.md
 - Sprint summary for user
+
+Only when ALL work is verified complete:
+<promise>DONE</promise>

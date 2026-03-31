@@ -44,10 +44,10 @@ Follow the `wave-orchestration` skill:
 2. Team-lead reads TASKS.md, groups into work streams
 3. Team-lead assigns teammates with explicit file ownership
 4. Teammates coordinate via shared task list + messaging
-5. Teammates can invoke gemini/codex for specific reviews:
+5. Teammates can invoke gemini/codex for specific reviews (replace `<scope>` with actual paths):
    ```bash
-   gemini -p "$(cat .claude/skills/codebase-mapping/SKILL.md) Review src/auth/ for architecture. Write to ops/REVIEW_GEMINI.md." &
-   codex exec "$(cat .claude/skills/test-driven-development/SKILL.md) Write tests for src/auth/login.ts." &
+   gemini -p "$(cat .claude/skills/codebase-mapping/SKILL.md) Review <scope> for architecture. Write to ops/REVIEW_GEMINI.md." &
+   codex exec "$(cat .claude/skills/test-driven-development/SKILL.md) Write tests for <scope>." &
    ```
 6. Quality gates: tests + lint must pass before marking tasks done
 7. Integration-verifier runs between waves
