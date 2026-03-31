@@ -548,6 +548,17 @@ After solving a non-trivial problem, <a href="commands/compound.md"><code>/compo
 
 ## Recent changes
 
+### 2026-03-31 — v2.0.0: Claude Code plugin conversion
+
+The framework was converted from a `git clone` + manual copy installation to a **Claude Code plugin**. This is a breaking change in how you install and update the framework.
+
+- **Install:** `claude plugin add https://github.com/Ninety2UA/multi-agent-framework`
+- **Update:** `claude plugin update multi-agent-framework`
+- All components moved from `.claude/` to root level (`agents/`, `skills/`, `commands/`, `hooks/`)
+- Hook registration moved to `hooks/hooks.json` with `${CLAUDE_PLUGIN_ROOT}` paths
+- Session-start hook now bootstraps `ops/` directory automatically on first run
+- Templates provided for CLAUDE.md and ops/ skeleton files
+
 ### 2026-03-31 — Comprehensive audit and Blueprint alignment
 
 Two full audit passes (10 parallel agents total) reviewed all 49 framework components (3 hooks, 16 commands, 12 skills, 18 agents). The first pass found **4 critical**, **10 high**, and **~20 medium** issues. A second verification pass caught **1 additional critical** (JSON injection), **8 high**, and **4 medium** issues introduced or missed in the first round. All issues have been fixed.

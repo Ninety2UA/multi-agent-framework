@@ -1200,83 +1200,51 @@ YOU: Review summary, check CHANGELOG, approve or request changes
   codex exec "Respond with only: READY"
   ```
 
-### Repository setup
+### Plugin installation
 
-```
-your-repo/
-├── .claude/
-│   ├── agents/                # Specialized agent definitions (14 agents)
-│   │   ├── plan-checker.md
-│   │   ├── findings-synthesizer.md
-│   │   ├── integration-verifier.md
-│   │   ├── learnings-researcher.md
-│   │   ├── security-sentinel.md
-│   │   ├── performance-oracle.md
-│   │   ├── code-simplicity-reviewer.md
-│   │   ├── bug-reproduction-validator.md
-│   │   ├── team-lead.md
-│   │   ├── research-synthesizer.md
-│   │   ├── convention-enforcer.md
-│   │   ├── framework-docs-researcher.md
-│   │   ├── git-history-analyzer.md
-│   │   └── test-gap-analyzer.md
-│   ├── skills/                # Portable skill library (11 skills)
-│   │   ├── codebase-mapping/SKILL.md
-│   │   ├── test-driven-development/SKILL.md
-│   │   ├── systematic-debugging/SKILL.md
-│   │   ├── writing-plans/SKILL.md
-│   │   ├── iterative-refinement/SKILL.md
-│   │   ├── verification-before-completion/SKILL.md
-│   │   ├── knowledge-compounding/SKILL.md
-│   │   ├── session-continuity/SKILL.md
-│   │   ├── wave-orchestration/SKILL.md
-│   │   ├── review-synthesis/SKILL.md
-│   │   └── shadow-path-tracing/SKILL.md
-│   ├── hooks/                 # Lifecycle hooks
-│   │   ├── ship-loop.sh       # Stop hook — inner loop
-│   │   └── context-monitor.sh # PostToolUse hook — analysis paralysis
-│   └── commands/              # Slash commands
-├── ops/
-│   ├── AGENTS.md              # Master operating protocol
-│   ├── ARCHITECTURE.md        # System design (Gemini writes)
-│   ├── CHANGELOG.md           # Audit trail
-│   ├── CONTRACTS.md           # Shared interface definitions
-│   ├── CONVENTIONS.md         # Code style and standards
-│   ├── GOALS.md               # High-level product goals
-│   ├── MEMORY.md              # Shared decisions, patterns, gotchas
-│   ├── STATE.md               # Session continuity
-│   ├── TASKS.md               # Work queue
-│   ├── solutions/             # Documented solved problems
-│   ├── decisions/             # Architecture decision records
-│   └── archive/               # Archived review + test files
-├── scripts/
-│   └── coordinate.sh          # Outer loop for context exhaustion recovery
-├── CLAUDE.md                  # Claude Code protocol (repo root, auto-read)
-├── GEMINI.md                  # Gemini CLI protocol
-├── CODEX.md                   # Codex CLI protocol
-└── src/                       # Source code
+```bash
+claude plugin add https://github.com/Ninety2UA/multi-agent-framework
 ```
 
-### Settings configuration
+The plugin provides agents, skills, commands, and hooks automatically. Your project gets an `ops/` directory (bootstrapped on first session):
 
-Add to `.claude/settings.json`:
+```
+multi-agent-framework/              (plugin — installed automatically)
+├── .claude-plugin/plugin.json        Plugin manifest
+├── agents/                           18 specialized agent definitions
+├── skills/                           12 portable workflow modules
+├── commands/                         16 slash commands
+├── hooks/
+│   ├── hooks.json                    Hook registration
+│   └── handlers/                     3 lifecycle hook scripts
+├── settings.json                     Default env vars
+└── scripts/coordinate.sh            Outer loop for context recovery
+
+your-project/                       (bootstrapped on first session)
+├── CLAUDE.md                         Orchestration protocol (copy from template)
+├── ops/                              Shared coordination files
+│   ├── MEMORY.md                       Decisions, patterns, gotchas
+│   ├── CHANGELOG.md                    Audit trail
+│   ├── STATE.md                        Session continuity
+│   ├── solutions/                      Documented solved problems
+│   ├── decisions/                      Architecture decision records
+│   └── archive/                        Archived review + test files
+└── src/                              Your source code
+```
+
+### Configuration
+
+The plugin handles all configuration automatically via `hooks/hooks.json` and `settings.json`. No manual `.claude/settings.json` editing needed.
+
+Hook registration uses `${CLAUDE_PLUGIN_ROOT}` for plugin-relative paths:
 
 ```json
 {
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
-  },
   "hooks": {
     "Stop": [
       {
-        "command": "hooks/handlers/ship-loop.sh",
-        "timeout": 10000
-      }
-    ],
-    "PostToolUse": [
-      {
-        "command": "hooks/handlers/context-monitor.sh",
-        "timeout": 5000
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": "bash ${CLAUDE_PLUGIN_ROOT}/hooks/handlers/ship-loop.sh" }]
       }
     ]
   }

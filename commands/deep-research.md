@@ -34,6 +34,8 @@ Focus on:
 - Technical debt or risks in this area
 
 Write a targeted analysis (not full ARCHITECTURE.md — just this topic)." > /tmp/gemini_research.txt 2>&1 &
+GEMINI_PID=$!
+wait $GEMINI_PID
 ```
 
 ### Agent 5: best-practices-researcher

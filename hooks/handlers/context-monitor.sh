@@ -4,9 +4,12 @@
 # and warns when approaching context limits.
 #
 # Hook event: PostToolUse
-# Configuration: add to .claude/settings.json hooks.PostToolUse
+# Configuration: registered in hooks/hooks.json (plugin)
 
 STATE_FILE=".claude/context-monitor.local.md"
+
+# Ensure .claude/ directory exists for project-local state files
+mkdir -p .claude
 
 # Read hook input from stdin (Claude Code delivers PostToolUse data as JSON on stdin)
 HOOK_INPUT=$(cat)

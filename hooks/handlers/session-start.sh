@@ -4,7 +4,10 @@
 # Provides orientation when starting a new session.
 #
 # Hook event: SessionStart
-# Configuration: registered in hooks/hooks.json (plugin) or .claude/settings.json (project)
+# Configuration: registered in hooks/hooks.json (plugin)
+
+# Ensure .claude/ directory exists for project-local state files
+mkdir -p .claude
 
 # Clean stale state files from previous sessions
 rm -f .claude/context-monitor.local.md

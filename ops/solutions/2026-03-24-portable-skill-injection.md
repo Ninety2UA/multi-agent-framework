@@ -27,5 +27,5 @@ This works because:
 When creating new skills, write them model-agnostically — no Claude-specific tool references, no assumptions about native skill loading. Frame as methodology, not tool instructions.
 
 ## Related
-- .claude/skills/ directory (12 skills)
+- skills/ directory (12 skills, at plugin root)
 - docs/multi-agent-framework.md (Portable skill protocol section)
