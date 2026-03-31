@@ -122,7 +122,7 @@ Every goal flows through a structured pipeline. Run [`/ship`](.claude/commands/s
 | **1 — Plan** | Decompose goal into tasks with shadow paths and error maps | Claude + [`writing-plans`](.claude/skills/writing-plans/SKILL.md) | [`/plan`](.claude/commands/plan.md) |
 | **1.5 — Validate** | Validate assignments, dependencies, scope, shadow paths | [`plan-checker`](.claude/agents/plan-checker.md) | [`/plan`](.claude/commands/plan.md) |
 | **2 — Build** | Wave orchestration with integration verification between waves | Claude subagents or [`team-lead`](.claude/agents/team-lead.md) | [`/build`](.claude/commands/build.md) |
-| **3–4 — Review** | Up to 8 parallel reviewers, synthesized with confidence tiering | Gemini + Codex + [review agents](#review-specialists-6) | [`/review`](.claude/commands/review.md) |
+| **3–4 — Review** | Up to 7 parallel reviewers, synthesized with confidence tiering | Gemini + Codex + [review agents](#review-specialists-6) | [`/review`](.claude/commands/review.md) |
 | **5 — Test** | TDD test writing, gap analysis, fix cycle until green | Codex CLI + [`test-driven-development`](.claude/skills/test-driven-development/SKILL.md) | [`/test`](.claude/commands/test.md) |
 | **6 — Ship** | Document solutions, archive reviews, write STATE.md | Claude + [`knowledge-compounding`](.claude/skills/knowledge-compounding/SKILL.md) | [`/wrap`](.claude/commands/wrap.md) |
 
@@ -196,7 +196,7 @@ codex exec "$(cat .claude/skills/test-driven-development/SKILL.md) Write tests f
 
 ## Review Swarm (`/review`)
 
-Up to 7 reviewers analyze the same code simultaneously through different lenses, then a [`findings-synthesizer`](.claude/agents/findings-synthesizer.md) merges, deduplicates, and priority-ranks all findings.
+Up to 7 reviewers analyze the same code simultaneously through different lenses (2 external CLIs + 5 Claude specialized agents with `--full`), then a [`findings-synthesizer`](.claude/agents/findings-synthesizer.md) merges, deduplicates, and priority-ranks all findings.
 
 <p align="center">
   <img src="docs/images/review-swarm.svg" alt="Review swarm — 7 parallel reviewers feeding into findings-synthesizer" width="80%">
@@ -377,7 +377,7 @@ claude
 | Command | What it does |
 |---|---|
 | [**`/ship <goal>`**](.claude/commands/ship.md) | Fully autonomous end-to-end sprint with inner loop guard. Won't stop until done. |
-| [**`/coordinate <goal>`**](.claude/commands/coordinate.md) | Same phases but without the exit guard — you can stop and resume manually. |
+| [**`/coordinate <goal>`**](.claude/commands/coordinate.md) | Same phases with exit guard — alternative entry point for the full lifecycle. |
 
 ### Phase-specific
 
@@ -480,7 +480,7 @@ Three defense mechanisms prevent long sprints from dying to context limits:
 
 | Layer | Mechanism | Guards against |
 |---|---|---|
-| **Inner loop** | [`ship-loop.sh`](.claude/hooks/ship-loop.sh) Stop hook — blocks exit, re-feeds prompt (max 5x) | Claude giving up mid-pipeline |
+| **Inner loop** | [`ship-loop.sh`](.claude/hooks/ship-loop.sh) Stop hook — blocks exit with JSON re-feed, session-isolated, transcript-based promise detection (max 5x) | Claude giving up mid-pipeline |
 | **Outer loop** | [`scripts/coordinate.sh`](scripts/coordinate.sh) — spawns fresh sessions with clean context | Context window filling up |
 | **Analysis paralysis** | [`context-monitor.sh`](.claude/hooks/context-monitor.sh) — warns at 8+ consecutive reads without writes | Reading without producing |
 | **Risk scoring** | Per-subagent risk accumulation — halt at >20% or 50+ file changes | Runaway subagents |
@@ -508,7 +508,7 @@ This framework was informed by analyzing the [Claude Code Blueprint](https://git
 | Dimension | [Claude Code Blueprint](https://github.com/Ninety2UA/claude-code-blueprint) | This framework |
 |---|---|---|
 | **Agent model** | Homogeneous (Claude-only) | Heterogeneous (Claude + Gemini + Codex) |
-| **Review agents** | 6 Claude subagents | 8 reviewers (2 external + 6 Claude subagents) |
+| **Review agents** | 6 Claude subagents | 7 reviewers (2 external + 5 Claude subagents) |
 | **Codebase analysis** | Claude subagent | [Gemini CLI](https://github.com/google-gemini/gemini-cli) (1M token context) |
 | **Test execution** | Claude subagent | [Codex CLI](https://github.com/openai/codex) (sandboxed execution) |
 | **Coordination** | Native subagents + git | File protocol + bash + subagents + teams |
@@ -518,7 +518,7 @@ This framework was informed by analyzing the [Claude Code Blueprint](https://git
 <details>
 <summary><strong>What we adopted from Blueprint</strong></summary>
 
-Confidence tiering, suppressions lists, review synthesis, wave orchestration, quality gates, institutional knowledge compounding, dual-loop context management, risk scoring, completion promise pattern, shadow path tracing, session continuity.
+Confidence tiering, suppressions lists, review synthesis, wave orchestration, quality gates, institutional knowledge compounding, dual-loop context management, risk scoring, completion promise pattern, shadow path tracing, session continuity. Ship-loop hook architecture: JSON `{decision, reason, systemMessage}` output, session isolation, transcript-based promise detection, atomic state updates, rich YAML frontmatter state file.
 </details>
 
 <details>
@@ -581,7 +581,7 @@ No. Use <a href=".claude/commands/quick.md"><code>/quick</code></a> for changes 
 <details>
 <summary><strong>How does context exhaustion recovery work?</strong></summary>
 
-Two layers. <strong>Inside</strong> a session, <a href=".claude/hooks/ship-loop.sh"><code>ship-loop.sh</code></a> blocks premature exit — if Claude tries to stop before completion, the hook re-injects the prompt (max 5 retries). <strong>Outside</strong> a session, <a href="scripts/coordinate.sh"><code>coordinate.sh</code></a> spawns fresh Claude processes with clean 200K context windows, with state persisting via git.
+Two layers. <strong>Inside</strong> a session, <a href=".claude/hooks/ship-loop.sh"><code>ship-loop.sh</code></a> blocks premature exit — it reads the session transcript, checks for <code>&lt;promise&gt;DONE&lt;/promise&gt;</code>, and if not found, re-injects the original goal as a JSON response <code>{decision, reason, systemMessage}</code> (max 5 iterations, session-isolated). <strong>Outside</strong> a session, <a href="scripts/coordinate.sh"><code>coordinate.sh</code></a> spawns fresh Claude processes with clean context windows, with state persisting via git.
 </details>
 
 <details>
@@ -589,6 +589,63 @@ Two layers. <strong>Inside</strong> a session, <a href=".claude/hooks/ship-loop.
 
 After solving a non-trivial problem, <a href=".claude/commands/compound.md"><code>/compound</code></a> saves it as a structured document in <a href="ops/solutions/"><code>ops/solutions/</code></a>. Future <a href=".claude/commands/plan.md"><code>/plan</code></a> and <a href=".claude/commands/deep-research.md"><code>/deep-research</code></a> commands automatically search this directory before starting new work — so every sprint gets smarter.
 </details>
+
+---
+
+## Recent changes
+
+### 2026-03-31 — Comprehensive audit and Blueprint alignment
+
+A 5-agent parallel audit reviewed all 49 framework components (3 hooks, 16 commands, 12 skills, 18 agents) and found **4 critical**, **10 high**, and **~20 medium** issues. All critical and high issues have been fixed.
+
+<details>
+<summary><strong>Critical fixes</strong></summary>
+
+- **Hooks were completely non-functional** — both `ship-loop.sh` and `context-monitor.sh` read environment variables (`$CLAUDE_STOP_ASSISTANT_MESSAGE`, `$CLAUDE_TOOL_NAME`) that Claude Code does not set. Hook data arrives via stdin JSON. Both hooks now parse stdin correctly. This means completion detection and analysis paralysis detection were silently broken since the framework's creation.
+- **README shipped broken hook config** — the Getting Started section used the flat `{ "command", "timeout" }` format that Claude Code rejects. Migrated to the correct `{ "matcher", "hooks": [{ "type": "command", "command" }] }` format.
+- **`/coordinate` ran full sprints unguarded** — the command executed Phase 0–6 without activating the ship-loop Stop hook, so context exhaustion could silently kill mid-sprint. Now creates the state file and emits `<promise>DONE</promise>` on completion.
+</details>
+
+<details>
+<summary><strong>Ship-loop rewrite (Blueprint alignment)</strong></summary>
+
+The Stop hook was rewritten to match the [Claude Code Blueprint](https://github.com/Ninety2UA/claude-code-blueprint)'s architecture:
+
+| Before | After |
+|---|---|
+| Plain text output | JSON `{decision, reason, systemMessage}` |
+| No session isolation | Session-isolated via `session_id` matching |
+| Basic stdin grep for promise | Transcript-based JSONL promise detection |
+| `sed -i.bak` state updates | Atomic temp file + `mv` |
+| No input validation | Integer validation + `set -euo pipefail` |
+| Simple 2-field state file | Rich frontmatter: `active`, `session_id`, `iteration`, `max_iterations`, `completion_promise` + prompt body |
+</details>
+
+<details>
+<summary><strong>High-severity fixes</strong></summary>
+
+- **`session-start.sh`** now cleans stale `context-monitor.local.md` on startup (was documented but never implemented)
+- **`build.md`** replaced hardcoded `src/auth/` paths with `<scope>` placeholders in agent team examples
+- **`deep-research.md`** Gemini invocation now injects `codebase-mapping` skill (was the only Gemini call without it)
+- **`review.md`** added `wait $GEMINI_PID $CODEX_PID` before synthesis (was racing on incomplete review files)
+- **`test.md`** Codex invocation now uses proper `> /tmp/... 2>&1 &` redirect + PID capture pattern
+- **`security-sentinel.md`** removed unnecessary Bash tool (least-privilege for static analysis)
+- **`team-lead.md`** added structured output format (was the only agent without one)
+- **`wave-orchestration`** skill flagged team mode as Claude-specific + experimental
+- **`review.md --full`** now includes `architecture-strategist` (was designed for Phase 3 but never wired in)
+</details>
+
+<details>
+<summary><strong>Medium-severity fixes</strong></summary>
+
+- Fixed missing `ops/` path prefixes across `ship.md`, `plan.md`, `quick.md`, `coordinate.md`
+- `plan-checker.md` now accepts "Claude subagent" as a valid assignment category
+- `git-history-analyzer.md` replaced interactive `git bisect` with non-interactive `git log -S` alternative
+- `deployment-verifier.md` added explicit "never execute rollbacks" safety rule
+- `session-start.sh` replaced `echo -e` with POSIX-portable `printf '%b\n'`
+</details>
+
+Documented solutions: [`ops/solutions/2026-03-31-hooks-stdin-json-parsing.md`](ops/solutions/2026-03-31-hooks-stdin-json-parsing.md)
 
 ---
 
