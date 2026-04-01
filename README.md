@@ -126,7 +126,7 @@ All agents coordinate through markdown files in [`ops/`](ops/). This is the sour
 
 | File | Purpose | Owner |
 |---|---|---|
-| `TASKS.md` | Work queue with `[ ]`/`[x]` status tracking | Claude generates, all agents read |
+| `TASKS.md` (runtime) | Work queue with `[ ]`/`[x]` status tracking | Claude generates, all agents read |
 | [`MEMORY.md`](ops/MEMORY.md) | Architectural decisions, patterns, interface proposals | All agents append |
 | [`CHANGELOG.md`](ops/CHANGELOG.md) | Audit trail with `[agent-name]` attribution | All agents append |
 | [`STATE.md`](ops/STATE.md) | Session continuity — current phase, progress, next actions | Claude writes on pause/wrap |

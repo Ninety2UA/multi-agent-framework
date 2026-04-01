@@ -81,7 +81,7 @@
     <text x="16" y="115" font-family="'SF Mono', 'Fira Code', monospace" font-size="12" fill="#8b949e">  Phase 0: Gemini analyzing codebase...</text>
     <text x="16" y="137" font-family="'SF Mono', 'Fira Code', monospace" font-size="12" fill="#8b949e">  Phase 1: Planning with shadow paths...</text>
     <text x="16" y="159" font-family="'SF Mono', 'Fira Code', monospace" font-size="12" fill="#8b949e">  Phase 2: Building via wave orchestration...</text>
-    <text x="16" y="181" font-family="'SF Mono', 'Fira Code', monospace" font-size="12" fill="#7ee787">  Phase 3: 8 reviewers dispatched...</text>
+    <text x="16" y="181" font-family="'SF Mono', 'Fira Code', monospace" font-size="12" fill="#7ee787">  Phase 3: 7 reviewers dispatched...</text>
     <text x="16" y="203" font-family="'SF Mono', 'Fira Code', monospace" font-size="12" fill="#7ee787">  &#x2713; All gates passed. Shipping.</text>
     <text x="16" y="233" font-family="'SF Mono', 'Fira Code', monospace" font-size="13" fill="#7ee787">></text>
     <text x="30" y="233" font-family="'SF Mono', 'Fira Code', monospace" font-size="13" fill="#c9d1d9"> /status</text>
