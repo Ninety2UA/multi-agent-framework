@@ -471,7 +471,9 @@ a:hover { color: var(--amber); }
 .install-grid {
   display: grid; grid-template-columns: 1fr; gap: 24px;
 }
-.install-step {}
+.install-step { display: flex; flex-direction: column; }
+.install-step .code-block { flex: 1; display: flex; flex-direction: column; }
+.install-step .code-block__body { flex: 1; }
 .install-step__label {
   font-family: var(--font-mono); font-size: 12px; font-weight: 600;
   color: var(--molten); text-transform: uppercase; letter-spacing: 0.1em;
