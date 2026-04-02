@@ -284,34 +284,70 @@ a:hover { color: var(--amber); }
 
 /* ═══ Feature Cards (Bento) ═══ */
 .bento {
-  display: grid; grid-template-columns: 1fr; gap: 16px;
+  display: grid; grid-template-columns: 1fr; gap: 20px;
+  grid-auto-rows: 1fr;
 }
 .bento__card {
   background: var(--forge-card); border: 1px solid var(--forge-border);
-  border-radius: 14px; padding: 32px; position: relative; overflow: hidden;
-  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  border-radius: 16px; padding: 36px 32px 32px; position: relative; overflow: hidden;
+  transition: transform 0.35s cubic-bezier(.22,.68,0,1), border-color 0.3s, box-shadow 0.35s;
   cursor: default;
+  border-top: 3px solid transparent;
 }
+.bento__card:nth-child(1) { border-image: linear-gradient(90deg, var(--molten), var(--amber)) 1; }
+.bento__card:nth-child(2) { border-image: linear-gradient(90deg, var(--steel), var(--steel-light)) 1; }
+.bento__card:nth-child(3) { border-image: linear-gradient(90deg, var(--gold), var(--amber)) 1; }
+.bento__card:nth-child(4) { border-image: linear-gradient(90deg, var(--ember), var(--molten)) 1; }
+.bento__card:nth-child(5) { border-image: linear-gradient(90deg, var(--molten-light), var(--gold)) 1; }
+.bento__card:nth-child(6) { border-image: linear-gradient(90deg, var(--steel), var(--molten)) 1; }
+
+.bento__card::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255,107,43,0.03) 0%, transparent 40%);
+  pointer-events: none; opacity: 0; transition: opacity 0.3s;
+}
+.bento__card:hover::after { opacity: 1; }
 .bento__card:hover {
-  transform: translateY(-4px); border-color: var(--molten);
-  box-shadow: 0 12px 40px rgba(255, 107, 43, 0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 30px rgba(255, 107, 43, 0.06);
 }
 .bento__card--wide { grid-column: span 1; }
 .bento__icon {
-  width: 48px; height: 48px; border-radius: 12px; display: flex;
-  align-items: center; justify-content: center; margin-bottom: 20px;
+  width: 52px; height: 52px; border-radius: 14px; display: flex;
+  align-items: center; justify-content: center; margin-bottom: 22px;
   font-size: 22px; font-weight: 700; font-family: var(--font-mono);
+  position: relative; z-index: 1;
 }
-.bento__icon--molten { background: rgba(255, 107, 43, 0.12); color: var(--molten-light); }
-.bento__icon--steel { background: rgba(74, 158, 255, 0.12); color: var(--steel-light); }
-.bento__icon--ember { background: rgba(232, 69, 69, 0.12); color: var(--ember); }
-.bento__icon--gold { background: rgba(255, 215, 0, 0.12); color: var(--gold); }
-.bento__card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-.bento__card p { color: var(--text-secondary); font-size: 15px; line-height: 1.65; }
+.bento__icon--molten {
+  background: linear-gradient(135deg, rgba(255,107,43,0.15), rgba(255,107,43,0.05));
+  color: var(--molten-light); box-shadow: 0 0 20px rgba(255,107,43,0.08);
+}
+.bento__icon--steel {
+  background: linear-gradient(135deg, rgba(74,158,255,0.15), rgba(74,158,255,0.05));
+  color: var(--steel-light); box-shadow: 0 0 20px rgba(74,158,255,0.08);
+}
+.bento__icon--ember {
+  background: linear-gradient(135deg, rgba(232,69,69,0.15), rgba(232,69,69,0.05));
+  color: var(--ember); box-shadow: 0 0 20px rgba(232,69,69,0.08);
+}
+.bento__icon--gold {
+  background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05));
+  color: var(--gold); box-shadow: 0 0 20px rgba(255,215,0,0.08);
+}
+.bento__card h3 {
+  font-size: 21px; font-weight: 700; margin-bottom: 10px;
+  position: relative; z-index: 1;
+}
+.bento__card p {
+  color: var(--text-secondary); font-size: 15px; line-height: 1.7;
+  position: relative; z-index: 1;
+}
 .bento__num {
-  position: absolute; top: 20px; right: 24px; font-family: var(--font-mono);
-  font-size: 48px; font-weight: 800; color: rgba(255, 107, 43, 0.07);
-  line-height: 1;
+  position: absolute; bottom: 12px; right: 20px; font-family: var(--font-mono);
+  font-size: 64px; font-weight: 900; line-height: 1;
+  background: linear-gradient(180deg, rgba(255,107,43,0.1), rgba(255,107,43,0.02));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; user-select: none; z-index: 0;
 }
 
 @media (min-width: 768px) {
