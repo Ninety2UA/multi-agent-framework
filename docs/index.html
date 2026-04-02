@@ -443,9 +443,10 @@ a:hover { color: var(--amber); }
 /* ═══ Context Recovery ═══ */
 .defense-grid {
   display: grid; grid-template-columns: 1fr; gap: 12px;
+  grid-auto-rows: 1fr;
 }
 .defense-card {
-  display: flex; gap: 20px; align-items: flex-start;
+  display: flex; gap: 20px; align-items: flex-start; height: 100%;
   background: var(--forge-card); border: 1px solid var(--forge-border);
   border-radius: 12px; padding: 24px; transition: all 0.25s;
 }
