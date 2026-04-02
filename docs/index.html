@@ -641,10 +641,207 @@ a:hover { color: var(--amber); }
 
 /* ═══ Responsive overflow guard ═══ */
 .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; }
+
+/* ═══ Scroll Progress Bar ═══ */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 1100;
+  background: linear-gradient(90deg, var(--molten), var(--amber), var(--molten-light));
+  width: 0%; transition: width 0.1s linear;
+  box-shadow: 0 0 10px var(--molten-glow);
+}
+
+/* ═══ Back to Top ═══ */
+.back-to-top {
+  position: fixed; bottom: 32px; right: 32px; z-index: 900;
+  width: 44px; height: 44px; border-radius: 12px;
+  background: var(--forge-card); border: 1px solid var(--forge-border);
+  color: var(--molten-light); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateY(20px); pointer-events: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.back-to-top.visible {
+  opacity: 1; transform: translateY(0); pointer-events: auto;
+}
+.back-to-top:hover {
+  background: var(--molten); color: #fff; border-color: var(--molten);
+  box-shadow: 0 4px 24px var(--molten-glow);
+}
+
+/* ═══ Shimmer Hero Title ═══ */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--molten) 0%,
+    var(--amber) 25%,
+    var(--molten-light) 50%,
+    var(--amber) 75%,
+    var(--molten) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ═══ Card Mouse Glow ═══ */
+.glow-card {
+  position: relative; overflow: hidden;
+}
+.glow-card::before {
+  content: '';
+  position: absolute; width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(255,107,43,0.12) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+  left: var(--mouse-x, -150px); top: var(--mouse-y, -150px);
+  transform: translate(-50%, -50%);
+  opacity: 0; transition: opacity 0.3s;
+  z-index: 0;
+}
+.glow-card:hover::before { opacity: 1; }
+.glow-card > * { position: relative; z-index: 1; }
+
+/* ═══ Noise Texture Overlay ═══ */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.018;
+  mix-blend-mode: overlay;
+}
+
+/* ═══ Terminal Typing Animation ═══ */
+.term__line--animated {
+  overflow: hidden; white-space: nowrap;
+  opacity: 0; max-width: 0;
+  transition: none;
+}
+.term__line--animated.typed {
+  opacity: 1; max-width: 800px;
+  transition: max-width 0.6s steps(40, end), opacity 0.1s;
+}
+
+/* ═══ Hero Terminal Float ═══ */
+@keyframes termFloat {
+  0%, 100% { transform: translateY(0) rotate3d(1, 0.5, 0, 0deg); }
+  50% { transform: translateY(-8px) rotate3d(1, 0.5, 0, 1.5deg); }
+}
+.hero__terminal {
+  animation: termFloat 6s ease-in-out infinite;
+}
+
+/* ═══ Stat Counter Animation ═══ */
+.hero__stat-num[data-target] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══ Pipeline Phase Highlight ═══ */
+.pipeline__phase {
+  position: relative;
+}
+.pipeline__phase::after {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--molten); opacity: 0;
+  transition: opacity 0.25s;
+}
+.pipeline__phase:hover::after { opacity: 1; }
+
+/* ═══ Agent Card Hover Glow ═══ */
+.agent-grid__card {
+  position: relative; overflow: hidden;
+}
+.agent-grid__card::after {
+  content: '';
+  position: absolute; inset: 0; opacity: 0;
+  background: linear-gradient(135deg, rgba(255,107,43,0.04), transparent);
+  transition: opacity 0.3s;
+}
+.agent-grid__card:hover::after { opacity: 1; }
+
+/* ═══ FAQ Glow on Active ═══ */
+.faq__item.active {
+  box-shadow: 0 0 20px rgba(255, 107, 43, 0.06);
+}
+
+/* ═══ Section Label Line ═══ */
+.section__label::before {
+  content: '';
+  display: inline-block; width: 24px; height: 2px;
+  background: var(--molten); vertical-align: middle;
+  margin-right: 10px;
+}
+.section__label::after {
+  content: '';
+  display: inline-block; width: 24px; height: 2px;
+  background: var(--molten); vertical-align: middle;
+  margin-left: 10px;
+}
+
+/* ═══ Glow Accent Separator ═══ */
+.glow-separator {
+  width: 100%; height: 1px; margin: 0;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,107,43,0.3) 20%,
+    rgba(255,107,43,0.6) 50%,
+    rgba(255,107,43,0.3) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 15px rgba(255,107,43,0.15);
+}
+
+/* ═══ Table Row Slide-in ═══ */
+.skills-table tbody tr,
+.cmd-table tbody tr {
+  opacity: 0; transform: translateX(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.skills-table.revealed tbody tr,
+.cmd-table.revealed tbody tr {
+  opacity: 1; transform: translateX(0);
+}
+.skills-table.revealed tbody tr:nth-child(1), .cmd-table.revealed tbody tr:nth-child(1) { transition-delay: 0s; }
+.skills-table.revealed tbody tr:nth-child(2), .cmd-table.revealed tbody tr:nth-child(2) { transition-delay: 0.04s; }
+.skills-table.revealed tbody tr:nth-child(3), .cmd-table.revealed tbody tr:nth-child(3) { transition-delay: 0.08s; }
+.skills-table.revealed tbody tr:nth-child(4), .cmd-table.revealed tbody tr:nth-child(4) { transition-delay: 0.12s; }
+.skills-table.revealed tbody tr:nth-child(5), .cmd-table.revealed tbody tr:nth-child(5) { transition-delay: 0.16s; }
+.skills-table.revealed tbody tr:nth-child(6), .cmd-table.revealed tbody tr:nth-child(6) { transition-delay: 0.20s; }
+.skills-table.revealed tbody tr:nth-child(7), .cmd-table.revealed tbody tr:nth-child(7) { transition-delay: 0.24s; }
+.skills-table.revealed tbody tr:nth-child(8), .cmd-table.revealed tbody tr:nth-child(8) { transition-delay: 0.28s; }
+.skills-table.revealed tbody tr:nth-child(9), .cmd-table.revealed tbody tr:nth-child(9) { transition-delay: 0.32s; }
+.skills-table.revealed tbody tr:nth-child(10), .cmd-table.revealed tbody tr:nth-child(10) { transition-delay: 0.36s; }
+.skills-table.revealed tbody tr:nth-child(11), .cmd-table.revealed tbody tr:nth-child(11) { transition-delay: 0.40s; }
+.skills-table.revealed tbody tr:nth-child(12), .cmd-table.revealed tbody tr:nth-child(12) { transition-delay: 0.44s; }
+.skills-table.revealed tbody tr:nth-child(n+13), .cmd-table.revealed tbody tr:nth-child(n+13) { transition-delay: 0.48s; }
+
+/* ═══ Gate Pulse ═══ */
+.gate__num { transition: all 0.3s; }
+.gate:hover .gate__num {
+  background: var(--molten); color: #fff; border-color: var(--molten);
+  box-shadow: 0 0 16px var(--molten-glow);
+}
+
+/* ═══ Reduced Motion Override ═══ */
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 .gradient-text { animation: none; }
+  .hero__terminal { animation: none; }
+  .term__line--animated { opacity: 1; max-width: none; }
+  .scroll-progress { display: none; }
+}
 </style>
 </head>
 
 <body>
+<!-- ═══ Scroll Progress ═══ -->
+<div class="scroll-progress" id="scroll-progress"></div>
+
 <!-- ═══ Navigation ═══ -->
 <nav class="nav" id="nav">
   <div class="nav__inner">
@@ -697,19 +894,19 @@ a:hover { color: var(--amber); }
         <p class="hero__tagline">Three AI models forging production-grade code together. Claude Code orchestrates Gemini CLI, Codex CLI, and 18 specialized subagents through file-based protocols, portable skills, and parallel review swarms.</p>
         <div class="hero__stats">
           <div class="hero__stat">
-            <span class="hero__stat-num">18</span>
+            <span class="hero__stat-num" data-target="18">0</span>
             <span class="hero__stat-label">Agents</span>
           </div>
           <div class="hero__stat">
-            <span class="hero__stat-num">12</span>
+            <span class="hero__stat-num" data-target="12">0</span>
             <span class="hero__stat-label">Skills</span>
           </div>
           <div class="hero__stat">
-            <span class="hero__stat-num">16</span>
+            <span class="hero__stat-num" data-target="16">0</span>
             <span class="hero__stat-label">Commands</span>
           </div>
           <div class="hero__stat">
-            <span class="hero__stat-num">5</span>
+            <span class="hero__stat-num" data-target="5">0</span>
             <span class="hero__stat-label">Hooks</span>
           </div>
           <div class="hero__stat">
@@ -733,16 +930,16 @@ a:hover { color: var(--amber); }
           <div class="term__title">claude</div>
         </div>
         <div class="term__body" id="terminal-body">
-          <span class="term__line"><span class="term__prompt">$</span> <span class="term__cmd">claude</span></span>
-          <span class="term__line"><span class="term__prompt">></span> <span class="term__flag">/ship</span> <span class="term__str">add user authentication with JWT</span></span>
-          <span class="term__line"><span class="term__comment">  Phase 0: Gemini analyzing codebase...</span></span>
-          <span class="term__line"><span class="term__comment">  Phase 1: Planning with shadow paths...</span></span>
-          <span class="term__line"><span class="term__comment">  Phase 1.1: Ambiguity check — 0 corrections</span></span>
-          <span class="term__line"><span class="term__comment">  Phase 2: Building via wave orchestration...</span></span>
-          <span class="term__line"><span class="term__success">  Phase 3: 7 reviewers dispatched in parallel</span></span>
-          <span class="term__line"><span class="term__success">  Phase 5: Codex TDD — 47 tests, all green</span></span>
-          <span class="term__line"><span class="term__success">  &#10003; All gates passed. Shipping.</span></span>
-          <span class="term__line"><span class="term__prompt">></span> <span class="term__cursor"></span></span>
+          <span class="term__line term__line--animated"><span class="term__prompt">$</span> <span class="term__cmd">claude</span></span>
+          <span class="term__line term__line--animated"><span class="term__prompt">></span> <span class="term__flag">/ship</span> <span class="term__str">add user authentication with JWT</span></span>
+          <span class="term__line term__line--animated"><span class="term__comment">  Phase 0: Gemini analyzing codebase...</span></span>
+          <span class="term__line term__line--animated"><span class="term__comment">  Phase 1: Planning with shadow paths...</span></span>
+          <span class="term__line term__line--animated"><span class="term__comment">  Phase 1.1: Ambiguity check — 0 corrections</span></span>
+          <span class="term__line term__line--animated"><span class="term__comment">  Phase 2: Building via wave orchestration...</span></span>
+          <span class="term__line term__line--animated"><span class="term__success">  Phase 3: 7 reviewers dispatched in parallel</span></span>
+          <span class="term__line term__line--animated"><span class="term__success">  Phase 5: Codex TDD — 47 tests, all green</span></span>
+          <span class="term__line term__line--animated"><span class="term__success">  &#10003; All gates passed. Shipping.</span></span>
+          <span class="term__line term__line--animated"><span class="term__prompt">></span> <span class="term__cursor"></span></span>
         </div>
       </div>
     </div>
@@ -758,7 +955,7 @@ a:hover { color: var(--amber); }
       <p class="section__desc">Every model does what it does best. Claude builds. Gemini analyzes. Codex tests. Knowledge compounds across sessions.</p>
     </div>
     <div class="bento reveal-stagger">
-      <div class="bento__card bento__card--wide">
+      <div class="bento__card bento__card--wide glow-card">
         <div class="bento__icon bento__icon--molten">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         </div>
@@ -766,7 +963,7 @@ a:hover { color: var(--amber); }
         <p>Claude Code (Opus) as lead agent, Gemini CLI for 1M-token codebase analysis, Codex CLI for sandboxed test execution. Each assigned by a heuristic matrix to what they do best.</p>
         <span class="bento__num">3</span>
       </div>
-      <div class="bento__card">
+      <div class="bento__card glow-card">
         <div class="bento__icon bento__icon--steel">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         </div>
@@ -774,7 +971,7 @@ a:hover { color: var(--amber); }
         <p>Security sentinel, performance oracle, architecture strategist, test-gap analyzer, findings synthesizer, and 13 more — each with restricted tools and focused expertise.</p>
         <span class="bento__num">18</span>
       </div>
-      <div class="bento__card">
+      <div class="bento__card glow-card">
         <div class="bento__icon bento__icon--gold">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
         </div>
@@ -782,7 +979,7 @@ a:hover { color: var(--amber); }
         <p>Model-agnostic workflow modules injected into any agent — TDD, systematic debugging, wave orchestration, shadow-path tracing, knowledge compounding.</p>
         <span class="bento__num">12</span>
       </div>
-      <div class="bento__card">
+      <div class="bento__card glow-card">
         <div class="bento__icon bento__icon--ember">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
@@ -790,14 +987,14 @@ a:hover { color: var(--amber); }
         <p>Up to 7 reviewers analyze code simultaneously — Gemini + Codex + 5 Claude specialist agents — then a findings-synthesizer merges with confidence tiering.</p>
         <span class="bento__num">7</span>
       </div>
-      <div class="bento__card">
+      <div class="bento__card glow-card">
         <div class="bento__icon bento__icon--molten">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </div>
         <h3>Knowledge Compounding</h3>
         <p>Every non-trivial solution is documented in <code>ops/solutions/</code>. A learnings-researcher automatically searches these before planning new work.</p>
       </div>
-      <div class="bento__card bento__card--wide">
+      <div class="bento__card bento__card--wide glow-card">
         <div class="bento__icon bento__icon--steel">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
@@ -927,7 +1124,7 @@ a:hover { color: var(--amber); }
       <p class="section__desc">Skills are markdown files that any agent can consume. Inject into Gemini or Codex via <code>$(cat skills/SKILL.md)</code>.</p>
     </div>
     <div class="table-wrap reveal">
-      <table class="skills-table">
+      <table class="skills-table reveal">
         <thead><tr><th>Skill</th><th>Consumer</th><th>What It Teaches</th></tr></thead>
         <tbody>
           <tr><td><code>codebase-mapping</code></td><td>Gemini (Phase 0)</td><td>Full-repo analysis: structure, data flow, patterns, debt</td></tr>
@@ -957,21 +1154,21 @@ a:hover { color: var(--amber); }
       <p class="section__desc">Two external CLIs and five Claude specialist agents analyze the same code simultaneously through different lenses, then a findings-synthesizer merges everything.</p>
     </div>
     <div class="bento reveal-stagger">
-      <div class="bento__card">
+      <div class="bento__card glow-card">
         <div class="bento__icon bento__icon--molten">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
         </div>
         <h3>Confidence Tiering</h3>
         <p><strong>HIGH</strong> — verified in codebase. <strong>MEDIUM</strong> — pattern match. <strong>LOW</strong> — heuristic only, can never be P1. Prevents wasting time on phantom issues.</p>
       </div>
-      <div class="bento__card">
+      <div class="bento__card glow-card">
         <div class="bento__icon bento__icon--steel">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
         </div>
         <h3>Suppressions</h3>
         <p>Each reviewer has a "Do Not Flag" list — readability-aiding redundancy, documented thresholds, sufficient assertions, consistency-only style changes.</p>
       </div>
-      <div class="bento__card">
+      <div class="bento__card glow-card">
         <div class="bento__icon bento__icon--ember">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
         </div>
@@ -1034,43 +1231,43 @@ a:hover { color: var(--amber); }
       <p class="section__desc">Long sprints don't die to context limits or silent failures.</p>
     </div>
     <div class="defense-grid reveal-stagger">
-      <div class="defense-card">
+      <div class="defense-card glow-card">
         <div class="defense-card__icon defense-card__icon--molten">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
         </div>
         <div><h4>Inner Loop</h4><p>ship-loop.sh Stop hook blocks exit with JSON re-feed, session-isolated, transcript-based promise detection (max 5x)</p></div>
       </div>
-      <div class="defense-card">
+      <div class="defense-card glow-card">
         <div class="defense-card__icon defense-card__icon--steel">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
         <div><h4>Outer Loop</h4><p>coordinate.sh spawns fresh sessions with clean context, notifies on completion via webhook or OS notification</p></div>
       </div>
-      <div class="defense-card">
+      <div class="defense-card glow-card">
         <div class="defense-card__icon defense-card__icon--amber">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </div>
         <div><h4>PreCompact Hook</h4><p>Auto-checkpoints STATE.md before context compaction — prevents state loss during mid-sprint compaction</p></div>
       </div>
-      <div class="defense-card">
+      <div class="defense-card glow-card">
         <div class="defense-card__icon defense-card__icon--ember">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         </div>
         <div><h4>Analysis Paralysis Detection</h4><p>context-monitor.sh warns at 8+ consecutive reads without writes — breaks the reading loop</p></div>
       </div>
-      <div class="defense-card">
+      <div class="defense-card glow-card">
         <div class="defense-card__icon defense-card__icon--molten">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         </div>
         <div><h4>Tool Failure Monitor</h4><p>Tracks and warns on accumulated tool failures — 5 consecutive or 10 total triggers alert</p></div>
       </div>
-      <div class="defense-card">
+      <div class="defense-card glow-card">
         <div class="defense-card__icon defense-card__icon--steel">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
         <div><h4>Subprocess Timeouts</h4><p>Watchdog pattern on all Gemini/Codex calls — SIGTERM after timeout, SIGKILL after 5s grace</p></div>
       </div>
-      <div class="defense-card">
+      <div class="defense-card glow-card">
         <div class="defense-card__icon defense-card__icon--amber">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
@@ -1167,7 +1364,7 @@ a:hover { color: var(--amber); }
       <h2 class="section__title">16 Slash Commands</h2>
     </div>
     <div class="table-wrap reveal">
-      <table class="cmd-table">
+      <table class="cmd-table reveal">
         <thead><tr><th>Command</th><th>What It Does</th></tr></thead>
         <tbody>
           <tr><td><code>/ship &lt;goal&gt;</code> <span class="cmd-badge cmd-badge--full">full</span></td><td>Fully autonomous end-to-end sprint with inner loop guard</td></tr>
@@ -1231,6 +1428,11 @@ a:hover { color: var(--amber); }
     </div>
   </div>
 </section>
+
+<!-- ═══ Back to Top ═══ -->
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
 <!-- ═══ Footer ═══ -->
 <footer class="footer">
@@ -1346,6 +1548,61 @@ fetch('https://api.github.com/repos/Ninety2UA/agent-triforge')
         : d.stargazers_count;
     }
   }).catch(() => {});
+
+/* ── Scroll progress bar ── */
+const progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+}, { passive: true });
+
+/* ── Back to top ── */
+const backToTop = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+  backToTop.classList.toggle('visible', window.scrollY > 600);
+}, { passive: true });
+backToTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* ── Counter animation ── */
+const counterObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      let current = 0;
+      const step = Math.ceil(target / 30);
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        el.textContent = current;
+      }, 40);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+/* ── Terminal typing animation ── */
+(function() {
+  const lines = document.querySelectorAll('.term__line--animated');
+  let delay = 400;
+  lines.forEach((line, i) => {
+    setTimeout(() => line.classList.add('typed'), delay);
+    delay += 350 + Math.random() * 200;
+  });
+})();
+
+/* ── Card mouse glow tracking ── */
+document.querySelectorAll('.glow-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+    card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+  });
+});
 
 /* ── Ember particle canvas (hero) ── */
 (function() {
