@@ -282,69 +282,57 @@ a:hover { color: var(--amber); }
   font-size: 17px; color: var(--text-secondary); line-height: 1.7;
 }
 
-/* ═══ Feature Cards (Bento) ═══ */
-.bento {
+/* ═══ Stats Row ═══ */
+.stats-row {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+  margin-bottom: 48px;
+}
+.stat-pill {
+  background: var(--forge-card); border: 1px solid var(--forge-border);
+  border-radius: 12px; padding: 24px 28px;
+  display: flex; align-items: center; gap: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.stat-pill:hover {
+  border-color: rgba(255,107,43,0.25);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+.stat-pill__num {
+  font-family: var(--font-mono); font-size: 36px; font-weight: 800;
+  color: var(--molten-light); line-height: 1; min-width: 52px;
+}
+.stat-pill__text h4 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.stat-pill__text p { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+
+@media (min-width: 768px) { .stats-row { grid-template-columns: repeat(4, 1fr); } }
+
+/* ═══ Feature Cards ═══ */
+.features-grid {
   display: grid; grid-template-columns: 1fr; gap: 16px;
-  grid-auto-rows: 1fr;
 }
-.bento__card {
-  background: linear-gradient(165deg, var(--forge-surface) 0%, var(--forge-card) 100%);
-  border: 1px solid var(--forge-border);
-  border-radius: 16px; padding: 32px; position: relative; overflow: hidden;
-  transition: transform 0.35s cubic-bezier(.22,.68,0,1), border-color 0.35s, box-shadow 0.35s;
-  cursor: default;
-  display: flex; flex-direction: column;
+.feat-card {
+  background: var(--forge-card); border: 1px solid var(--forge-border);
+  border-radius: 14px; padding: 28px; position: relative;
+  transition: transform 0.3s ease, border-color 0.3s, box-shadow 0.3s;
+  cursor: default; display: flex; flex-direction: column;
 }
-.bento__card:hover {
-  transform: translateY(-5px); border-color: rgba(255,107,43,0.3);
-  box-shadow:
-    0 20px 50px rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(255,255,255,0.04);
+.feat-card:hover {
+  transform: translateY(-4px); border-color: rgba(255,107,43,0.2);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
 }
-.bento__card--wide { grid-column: span 1; }
+.feat-card__icon {
+  width: 44px; height: 44px; border-radius: 10px; display: flex;
+  align-items: center; justify-content: center; margin-bottom: 18px; flex-shrink: 0;
+}
+.feat-card__icon--molten { background: rgba(255,107,43,0.1); color: var(--molten-light); }
+.feat-card__icon--steel { background: rgba(74,158,255,0.1); color: var(--steel-light); }
+.feat-card__icon--ember { background: rgba(232,69,69,0.1); color: var(--ember); }
+.feat-card__icon--gold { background: rgba(255,215,0,0.1); color: var(--gold); }
+.feat-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+.feat-card p { color: var(--text-secondary); font-size: 14px; line-height: 1.65; flex: 1; }
 
-/* Icon row */
-.bento__top {
-  display: flex; align-items: flex-start;
-  margin-bottom: 20px;
-}
-.bento__icon {
-  width: 48px; height: 48px; border-radius: 12px; display: flex;
-  align-items: center; justify-content: center;
-}
-.bento__icon--molten { background: rgba(255,107,43,0.1); color: var(--molten-light); }
-.bento__icon--steel { background: rgba(74,158,255,0.1); color: var(--steel-light); }
-.bento__icon--ember { background: rgba(232,69,69,0.1); color: var(--ember); }
-.bento__icon--gold { background: rgba(255,215,0,0.1); color: var(--gold); }
-
-.bento__num {
-  position: absolute; bottom: -12px; right: 16px;
-  font-family: var(--font-mono); font-size: 110px; font-weight: 900;
-  line-height: 1; user-select: none; pointer-events: none;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255,107,43,0.07);
-  transition: -webkit-text-stroke-color 0.4s;
-}
-.bento__card:hover .bento__num {
-  -webkit-text-stroke-color: rgba(255,107,43,0.14);
-}
-
-.bento__card h3 {
-  font-size: 19px; font-weight: 700; margin-bottom: 10px;
-}
-.bento__card p {
-  color: var(--text-secondary); font-size: 14.5px; line-height: 1.7;
-  flex: 1;
-}
-
-@media (min-width: 768px) {
-  .bento { grid-template-columns: repeat(2, 1fr); }
-  .bento__card--wide { grid-column: span 2; }
-}
-@media (min-width: 1024px) {
-  .bento { grid-template-columns: repeat(3, 1fr); }
-  .bento__card--wide { grid-column: span 2; }
-}
+@media (min-width: 768px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
 
 /* ═══ Pipeline (Phases) ═══ */
 .pipeline {
@@ -980,64 +968,69 @@ body::after {
       <h2 class="section__title">A Complete Multi-Agent Development System</h2>
       <p class="section__desc">Every model does what it does best. Claude builds. Gemini analyzes. Codex tests. Knowledge compounds across sessions.</p>
     </div>
-    <div class="bento reveal-stagger">
-      <div class="bento__card bento__card--wide glow-card">
-        <span class="bento__num">3</span>
-        <div class="bento__top">
-          <div class="bento__icon bento__icon--molten">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
+    <!-- Stats row -->
+    <div class="stats-row reveal-stagger">
+      <div class="stat-pill">
+        <div class="stat-pill__num">3</div>
+        <div class="stat-pill__text"><h4>AI Models</h4><p>Claude + Gemini + Codex</p></div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-pill__num">18</div>
+        <div class="stat-pill__text"><h4>Agents</h4><p>Specialized subagents</p></div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-pill__num">12</div>
+        <div class="stat-pill__text"><h4>Skills</h4><p>Portable workflows</p></div>
+      </div>
+      <div class="stat-pill">
+        <div class="stat-pill__num">7</div>
+        <div class="stat-pill__text"><h4>Reviewers</h4><p>Parallel review swarm</p></div>
+      </div>
+    </div>
+
+    <!-- Feature cards — uniform 3-column grid -->
+    <div class="features-grid reveal-stagger">
+      <div class="feat-card glow-card">
+        <div class="feat-card__icon feat-card__icon--molten">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         </div>
         <h3>Three-Model Orchestration</h3>
-        <p>Claude Code (Opus) as lead agent, Gemini CLI for 1M-token codebase analysis, Codex CLI for sandboxed test execution. Each assigned by a heuristic matrix to what they do best.</p>
+        <p>Claude Code as lead agent, Gemini CLI for 1M-token codebase analysis, Codex CLI for sandboxed test execution. Each assigned by a heuristic matrix.</p>
       </div>
-      <div class="bento__card glow-card">
-        <span class="bento__num">18</span>
-        <div class="bento__top">
-          <div class="bento__icon bento__icon--steel">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
+      <div class="feat-card glow-card">
+        <div class="feat-card__icon feat-card__icon--steel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         </div>
-        <h3>18 Specialized Agents</h3>
-        <p>Security sentinel, performance oracle, architecture strategist, test-gap analyzer, findings synthesizer, and 13 more — each with restricted tools and focused expertise.</p>
+        <h3>Specialized Agents</h3>
+        <p>Security sentinel, performance oracle, architecture strategist, test-gap analyzer, findings synthesizer — each with restricted tools and focused expertise.</p>
       </div>
-      <div class="bento__card glow-card">
-        <span class="bento__num">12</span>
-        <div class="bento__top">
-          <div class="bento__icon bento__icon--gold">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          </div>
+      <div class="feat-card glow-card">
+        <div class="feat-card__icon feat-card__icon--gold">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
         </div>
-        <h3>12 Portable Skills</h3>
+        <h3>Portable Skills</h3>
         <p>Model-agnostic workflow modules injected into any agent — TDD, systematic debugging, wave orchestration, shadow-path tracing, knowledge compounding.</p>
       </div>
-      <div class="bento__card glow-card">
-        <span class="bento__num">7</span>
-        <div class="bento__top">
-          <div class="bento__icon bento__icon--ember">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          </div>
+      <div class="feat-card glow-card">
+        <div class="feat-card__icon feat-card__icon--ember">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
         <h3>Parallel Review Swarm</h3>
-        <p>Up to 7 reviewers analyze code simultaneously — Gemini + Codex + 5 Claude specialist agents — then a findings-synthesizer merges with confidence tiering.</p>
+        <p>Up to 7 reviewers analyze code simultaneously — Gemini + Codex + 5 Claude specialist agents — then merged with confidence tiering.</p>
       </div>
-      <div class="bento__card glow-card">
-        <div class="bento__top">
-          <div class="bento__icon bento__icon--molten">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          </div>
+      <div class="feat-card glow-card">
+        <div class="feat-card__icon feat-card__icon--molten">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </div>
         <h3>Knowledge Compounding</h3>
         <p>Every non-trivial solution is documented in <code>ops/solutions/</code>. A learnings-researcher automatically searches these before planning new work.</p>
       </div>
-      <div class="bento__card bento__card--wide glow-card">
-        <div class="bento__top">
-          <div class="bento__icon bento__icon--steel">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
+      <div class="feat-card glow-card">
+        <div class="feat-card__icon feat-card__icon--steel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
-        <h3>File-Based Coordination Protocol</h3>
-        <p>All agents coordinate through shared markdown in <code>ops/</code> — TASKS.md, MEMORY.md, CHANGELOG.md, STATE.md, CONTRACTS.md. Auditable, git-friendly, debuggable. No custom RPC, no databases — just files.</p>
+        <h3>File-Based Coordination</h3>
+        <p>All agents coordinate through shared markdown in <code>ops/</code> — TASKS.md, MEMORY.md, CHANGELOG.md, STATE.md. Auditable, git-friendly, no databases.</p>
       </div>
     </div>
   </div>
